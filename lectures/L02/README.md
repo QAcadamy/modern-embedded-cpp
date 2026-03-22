@@ -8,6 +8,8 @@
 * Copy and move semantics.
 * Keywords `explicit`, `final`, `default`, and `delete`.
 
+---
+
 ## Goals of the Lecture
 After this lecture, participants should:
 * Be able to create simple classes in C++.
@@ -18,9 +20,13 @@ After this lecture, participants should:
 * Understand the purpose of the keywords `explicit`, `final`, `default`, and `delete`.
 * Be able to define and use enumeration classes (`enum class`).
 
+---
+
 ## Prerequisites
 * Familiarity with the modern C++ concepts introduced in the previous lecture.
 * Basic knowledge of C programming (functions, pointers, and structs).
+
+---
 
 ## Instructions
 
@@ -29,12 +35,13 @@ After this lecture, participants should:
 * It is also recommended to read [Appendix B](./appendix/b_classes2.md), which provides a deeper discussion of classes.
 
 ### During the Lecture
-* Two class implementations will be developed live during the lecture:
-    * A simple class implemented entirely in a header file.
-    * A more advanced class separated into a header file and a source file.
-* Complete the exercises in [Appendix C](./appendix/c_exercises.md):
-    * Participants will be given time during the lecture to complete the exercises.
-    * The solutions will then be discussed together in class.
+* Participate in the lecture (live coding session).
+
+### After the Lecture
+* Complete the exercises in [Appendix C](./appendix/c_exercises.md).
+* Exercise solutions will be uploaded a few days after the session.
+
+---
 
 ## Evaluation
 * Participants should be able to explain:
@@ -44,6 +51,8 @@ After this lecture, participants should:
     * What is a destructor, and when is it called?
     * What is the meaning of keywords `explicit` and `final`?
     * What is `default` and `delete` used for?
+
+---
 
 ## Next Lecture
 * Inheritance and interfaces.
