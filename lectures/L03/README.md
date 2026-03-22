@@ -5,7 +5,7 @@
 * Interfaces (abstract classes) for defining a common set of methods that different
 classes can implement in different ways.
 
-## Objectives of the lesson
+## Objectives
 * Be able to create classes that inherit from other classes.
 * Be able to create interfaces.
 * Understand how several different implementations can be used through the same interface.
@@ -22,17 +22,23 @@ classes can implement in different ways.
     * Demonstration in C++ [here](./examples/cpp_interface/README.md).
     * Implementation in C to understand how interfaces work "under the hood" [here](./examples/c_interface/README.md).
 
-### During the lesson
-* Complete the exercises in [Appendix C](./appendix/c_exercises.md), which cover interfaces for embedded systems:
-    * You will have time during the lesson to complete the exercises.
-    * The solutions will then be discussed together in class.
+### During the Lecture
+* Participate in the lecture (live coding session).
+
+### After the Lecture
+* Complete the exercises in [Appendix C](./appendix/c_exercises.md).
+* Exercise solutions will be uploaded a few days after the session.
+
+---
 
 ## Evaluation
 * What does inheritance mean in C++?
 * What is an abstract class?
 * Why can it be useful to use an interface for a driver?
 
-## Next lesson
+---
+
+## Next lecture
 * Factory pattern with smart pointers in C++.
 
 ---

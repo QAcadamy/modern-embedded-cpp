@@ -12,7 +12,7 @@
 
 ---
 
-## Goals of the Lecture
+## Objectives
 After this lecture, participants should:
 * Become familiar with modern C++ language features commonly used in embedded systems.
 * Understand how C++ can improve structure and safety in embedded software.

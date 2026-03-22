@@ -10,7 +10,7 @@
 
 ---
 
-## Goals of the Lecture
+## Objectives
 After this lecture, participants should:
 * Be able to create simple classes in C++.
 * Understand the purpose of constructors and destructors.

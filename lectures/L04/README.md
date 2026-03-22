@@ -7,7 +7,9 @@
   * Smart pointers.
 * How the system logic uses factories to create drivers.
 
-## Lesson objectives
+---
+
+## Objectives
 * Understand what the factory pattern is and why it is used.
 * Understand how a factory enables switching between:
   * Real drivers.
@@ -19,16 +21,22 @@
 * Basic knowledge of classes and interfaces in C++.
 * Understanding of stubs and system logic.
 
+---
+
 ## Instructions
 
 ### Preparation
 * Read [Appendix A](./appendix/a_factory_raw_pointers.md) for information about factories using raw pointers.
 * Read [Appendix B](./appendix/b_factory_smart_pointers.md) for information about factories using smart pointers.
 
-### During the lesson
-* Complete the exercises in [Appendix C](./appendix/c_exercises.md):
-    * You will have time during the lesson to complete the exercises.
-    * The solutions will then be discussed together in class.
+### During the Lecture
+* Participate in the lecture (live coding session).
+
+### After the Lecture
+* Complete the exercises in [Appendix C](./appendix/c_exercises.md).
+* Exercise solutions will be uploaded a few days after the session.
+
+---
 
 ## Evaluation
 1. What is the purpose of the factory pattern?
@@ -37,7 +45,7 @@
 4. What is the difference between raw pointers and `std::unique_ptr`?
 5. Why is `std::unique_ptr` suitable in the factory pattern?
 
-## Next lesson
+## Next lecture
 * Class templates.
 
 ---
