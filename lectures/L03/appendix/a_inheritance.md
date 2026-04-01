@@ -12,7 +12,7 @@ Assume that a base class named `driver::Gpio` has been created in order to easil
 ```cpp
 namespace driver
 {
-class Gpio final
+class Gpio
 {
 public:
     explicit Gpio(std::uint8_t pin) noexcept;
