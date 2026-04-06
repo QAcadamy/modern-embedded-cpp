@@ -72,7 +72,8 @@ private:
 **f)** Create an instance of the class:
 
 ```cpp
-driver::gpio::Led led{13U};
+constexpr std::uint8_t ledPin{13U};
+driver::gpio::Led led{ledPin};
 ```
 
 Test the class by:
@@ -80,6 +81,7 @@ Test the class by:
 * Calling `on()`.
 * Printing again.
 * Calling `toggle()`.
+* Printing once more.
 
 Use `std::printf()` from `<cstdio>` for the output.
 
@@ -150,7 +152,8 @@ private:
 **f)** Create an instance:
 
 ```cpp
-driver::gpio::Button button{2U};
+constexpr std::uint8_t buttonPin{2U};
+driver::gpio::Button button{buttonPin};
 ```
 
 Simulate a button press:
@@ -314,7 +317,8 @@ Releasing resources allocated for buzzer at pin 8!
 
 
 ```cpp
-driver::Buzzer buzzer{8U};
+constexpr std::uint8_t buzzerPin{8U};
+driver::Buzzer buzzer{buzzerPin};
 ```
 
 Test the class by:
@@ -372,7 +376,7 @@ private:
 ```
 
 ### Tasks
-**a)** Add three private member variables:
+**a)** Add four private member variables:
 * The first member variable shall:
     * Be named `myTimeout_ms`.
     * Represent the timeout duration in milliseconds.
@@ -386,12 +390,17 @@ private:
     * Be named `myRunning`.
     * Represent whether the timer is active or not (`true/false`).
     * Be `true` when the timer is running.
+* The fourth member variable shall:
+    * Be named `myInitialized`.
+    * Represent whether the timer is initialized or not (`true/false`).
+    * Be `true` when the timer is initialized.
 
 **b)** Add a constructor in the header file that:
 * Takes a timeout value in milliseconds (`std::uint32_t`).
 * Uses an initialization list to initialize the member variables.
 * Initializes the counter to `0`.
 * Initializes the timer as stopped.
+* Marks the timer as initialized if the timeout value is valid (`> 0`).
 * Is marked `explicit` and `noexcept`.
 
 **c)** Add a destructor in the header file:
@@ -405,13 +414,30 @@ Stopping timer before deletion!
 ```
 
 **d)** Declare the following methods in the header file and implement them in `driver/timer.cpp`:
+* The method `timeout_ms()` shall:
+    * Return the configured timeout in milliseconds.
+    * Take no parameters.
+    * Be marked `const` and `noexcept`.
+* The method `isRunning()` shall:
+    * Return `true` if the timer is running, otherwise `false`.
+    * Take no parameters.
+    * Be marked `const` and `noexcept`.
+* The method `isInitialized()` shall:
+    * Return `true` if the timer is initialized, otherwise `false`.
+    * Take no parameters.
+    * Be marked `const` and `noexcept`.
 * The method `start()` shall:
-    * Start the timer.
+    * Start the timer if the timer is initialized.
     * Take no parameters.
     * Return no value.
     * Be marked `noexcept`.
 * The method `stop()` shall:
-    * Stop the timer.
+    * Stop the timer if the timer is initialized.
+    * Take no parameters.
+    * Return no value.
+    * Be marked `noexcept`.
+* The method `toggle()` shall:
+    * Toggle the timer if the timer is initialized.
     * Take no parameters.
     * Return no value.
     * Be marked `noexcept`.
@@ -420,7 +446,7 @@ Stopping timer before deletion!
     * Increment the counter if the timer is running; otherwise do nothing.
     * Return no value.
     * Be marked `noexcept`.
-* The method `timeout()` shall:
+* The method `hasTimedOut()` shall:
     * Return `true` when the counter has reached the timeout value, otherwise `false`.
     * Reset the counter to `0` when a timeout occurs.
     * Be marked `noexcept`.
@@ -435,14 +461,15 @@ Stopping timer before deletion!
 **f)** In `main.cpp`, create an instance of the class:
 
 ```cpp
-driver::Timer timer{1000U};
+constexpr std::uint32_t timeout_ms{1000U};
+driver::Timer timer{timeout_ms};
 ```
 Test the class by:
 * Starting the timer.
 * Running a loop for 3000 iterations:
     * In each iteration:
         * Call `tick()`.
-        * Check `timeout()`.
+        * Check `hasTimedOut()`.
         * Print a message if a timeout has occurred:
 
 ```text
@@ -459,6 +486,7 @@ Example output:
 Timeout after 1000 ms!
 Timeout after 1000 ms!
 Timeout after 1000 ms!
+Stopping timer before deletion!
 ```
 
 ---
