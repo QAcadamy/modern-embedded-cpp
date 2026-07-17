@@ -22,7 +22,7 @@ public:
     virtual ~Interface() noexcept = default;
     virtual void start() noexcept = 0;
     virtual void stop() noexcept = 0;
-    virtual bool isRunning() const noexcept = 0;
+    [[nodiscard]] virtual bool isRunning() const noexcept = 0;
     virtual void reset() noexcept = 0;
 };
 } // namespace driver::timer
@@ -43,6 +43,10 @@ A few things to note:
 * All virtual methods are here marked `noexcept`:
     * This forces all concrete implementations in the subclasses to not be able to throw exceptions.
     * This is advantageous in an embedded system, but if you do not want to enforce this it is fine to omit `noexcept` here.
+* The method isRunning() is marked [[nodiscard]]:
+    * This encourages callers to use the returned value by generating a compiler warning if it is discarded.
+    * Since [[nodiscard]] is specified in the interface, it is inherited by all overriding methods.
+    * Therefore, subclasses do not need (and should not) repeat the [[nodiscard]] attribute on their implementations.
 
 ---
 
@@ -97,7 +101,7 @@ various LEDs, for example from different microprocessors:
 
 ```cpp
 /**
- * @brief LED driver interface.
+ * @file LED driver interface.
  */
 #pragma once
 
@@ -121,14 +125,14 @@ public:
      * 
      * @return The pin the LED is connected to.
      */
-    virtual std::uint8_t pin() const noexcept = 0;
+    [[nodiscard]] virtual std::uint8_t pin() const noexcept = 0;
 
     /**
      * @brief Check whether the LED is enabled.
      * 
      * @return True if the LED is enabled, false otherwise.
      */
-    virtual bool isEnabled() const noexcept = 0;
+    [[nodiscard]] virtual bool isEnabled() const noexcept = 0;
 
     /**
      * @brief Enable/disable the LED.

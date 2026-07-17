@@ -1,9 +1,9 @@
 /**
- * @brief Serial driver stub implementation details.
+ * @file Serial driver stub implementation details.
  */
 #include <cstdint>
 
-#include "driver/serial/stub.h"
+#include "driver/serial/stub.hpp"
 
 namespace driver::serial
 {

@@ -1,5 +1,5 @@
 /**
- * @brief Serial driver interface.
+ * @file Serial driver interface.
  */
 #pragma once
 
@@ -23,7 +23,7 @@ public:
      *
      * @return True if initialized, false otherwise.
      */
-    virtual bool isInitialized() const noexcept = 0;
+    [[nodiscard]] virtual bool isInitialized() const noexcept = 0;
 
     /**
      * @brief Transmit one byte of data.

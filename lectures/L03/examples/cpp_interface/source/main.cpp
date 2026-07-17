@@ -1,12 +1,12 @@
 /**
- * @brief Demonstration of interfaces for LEDs.
+ * @file Demonstration of interfaces for LEDs.
  */
 #include <chrono>
 #include <cstdint>
 #include <thread>
 
-#include "driver/led/atmega328p.h"
-#include "driver/led/esp32s3.h"
+#include "driver/led/atmega328p.hpp"
+#include "driver/led/esp32s3.hpp"
 
 using namespace driver;
 

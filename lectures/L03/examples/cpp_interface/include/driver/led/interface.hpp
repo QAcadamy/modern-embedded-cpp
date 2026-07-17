@@ -1,5 +1,5 @@
 /**
- * @brief LED driver interface.
+ * @file LED driver interface.
  */
 #pragma once
 
@@ -23,14 +23,14 @@ public:
      *
      * @return The pin the LED is connected to.
      */
-    virtual std::uint8_t pin() const noexcept = 0;
+    [[nodiscard]] virtual std::uint8_t pin() const noexcept = 0;
 
     /**
      * @brief Check whether the LED is enabled.
      *
      * @return True if the LED is enabled, false otherwise.
      */
-    virtual bool isEnabled() const noexcept = 0;
+    [[nodiscard]] virtual bool isEnabled() const noexcept = 0;
 
     /**
      * @brief Enable/disable the LED.

@@ -1,11 +1,11 @@
 /**
- * @brief Solution for L03 exercises.
+ * @file Solution for L03 exercises.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/serial/console.h"
-#include "driver/serial/stub.h"
+#include "driver/serial/console.hpp"
+#include "driver/serial/stub.hpp"
 
 using namespace driver;
 

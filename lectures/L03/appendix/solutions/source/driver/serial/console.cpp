@@ -1,10 +1,10 @@
 /**
- * @brief Serial console driver implementation details.
+ * @file Serial console driver implementation details.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/serial/console.h"
+#include "driver/serial/console.hpp"
 
 namespace driver::serial
 {

@@ -1,11 +1,11 @@
 /**
- * @brief LED driver for ATmega328P.
+ * @file LED driver for ATmega328P.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/led/interface.h"
+#include "driver/led/interface.hpp"
 
 namespace driver::led
 {

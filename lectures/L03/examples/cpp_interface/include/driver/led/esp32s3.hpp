@@ -1,11 +1,11 @@
 /**
- * @brief LED driver for ESP32-S3.
+ * @file LED driver for ESP32-S3.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/led/interface.h"
+#include "driver/led/interface.hpp"
 
 namespace driver::led
 {

@@ -1,11 +1,11 @@
 /**
- * @brief Serial driver stub.
+ * @file Serial driver stub.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/serial/interface.h"
+#include "driver/serial/interface.hpp"
 
 namespace driver::serial
 {

@@ -10,9 +10,9 @@ Makefile
 include/
     driver/
         serial/
-            console.h
-            interface.h
-            stub.h
+            console.hpp
+            interface.hpp
+            stub.hpp
 source/
     driver/
         serial/
@@ -29,7 +29,7 @@ source/
 In this exercise you will design an interface `driver::serial::Interface` representing a generic serial communication driver.
 
 ### Tasks
-In `driver/serial/interface.h`, design a class named `driver::serial::Interface` that represents a generic serial driver.
+In `driver/serial/interface.hpp`, design a class named `driver::serial::Interface` that represents a generic serial driver.
 
 All methods except the destructor shall be purely virtual (`= 0`).
 
@@ -48,6 +48,7 @@ Add a pure virtual method `isInitialized()` that:
 * Indicates whether the driver has been initialized (`true/false`).
 * Does not modify the object (`const`).
 * Cannot throw exceptions.
+* Generates a warning if the return value is discarded (`[[nodiscard]]`).
 
 ---
 
@@ -66,13 +67,14 @@ Add a pure virtual method `read()` that:
 * Takes a reference to a variable where the byte will be stored.
 * Returns `true` if a byte was received, otherwise `false`.
 * Cannot throw exceptions.
+* Lets the user discard the return value if desired (`[[nodiscard]]` omitted).
 
 ---
 
 # Exercise Set 2 – Stub implementation
 
 ## Exercise 2.1 – Serial stub
-In `driver/serial/stub.h`, implement a stub driver `driver::serial::Stub` for the serial interface.
+In `driver/serial/stub.hpp`, implement a stub driver `driver::serial::Stub` for the serial interface.
 
 A stub driver simulates hardware behaviour and is useful for testing without real hardware.
 
@@ -140,7 +142,7 @@ This method shall:
 # Exercise Set 3 – Singleton driver
 
 ## Exercise 3.1 – Console serial driver
-In `driver/serial/console.h`, create a real driver implementation `driver::serial::Console` that writes transmitted bytes to the system console.
+In `driver/serial/console.hpp`, create a real driver implementation `driver::serial::Console` that writes transmitted bytes to the system console.
 
 This driver shall follow the so-called singleton pattern, i.e. there is only one instance of the class.
 

@@ -1,11 +1,11 @@
 /**
- * @brief Serial console driver.
+ * @file Serial console driver.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/serial/interface.h"
+#include "driver/serial/interface.hpp"
 
 namespace driver::serial
 {

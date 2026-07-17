@@ -1,10 +1,10 @@
 /**
- * @brief LED driver implementation details for ATmega328P.
+ * @file LED driver implementation details for ATmega328P.
  */
 #include <cstdint>
 #include <iostream>
 
-#include "driver/led/atmega328p.h"
+#include "driver/led/atmega328p.hpp"
 
 namespace driver::led
 {

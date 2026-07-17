@@ -18,7 +18,7 @@ public:
     explicit Gpio(std::uint8_t pin) noexcept;
     ~Gpio() noexcept;
 
-    bool read() const noexcept;
+    [[nodiscard]] bool read() const noexcept;
     void write(bool enable) noexcept;
 
     Gpio()                       = delete;
@@ -103,7 +103,7 @@ public:
     ~Button() noexcept;
 
     void enableInterrupt(bool enable) noexcept;
-    bool isInterruptEnabled() const noexcept;
+    [[nodiscard]] bool isInterruptEnabled() const noexcept;
 
     Button()                         = delete;
     Button(const Button&)            = delete;

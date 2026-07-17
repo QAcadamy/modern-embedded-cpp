@@ -1,10 +1,10 @@
 /**
- * @brief LED driver implementation details for ESP32-S3.
+ * @file LED driver implementation details for ESP32-S3.
  */
 #include <cstdint>
 #include <iostream>
 
-#include "driver/led/esp32s3.h"
+#include "driver/led/esp32s3.hpp"
 
 namespace driver::led
 {
