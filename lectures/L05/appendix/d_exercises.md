@@ -120,7 +120,7 @@ Tasks:
 ## Exercise Set 3 – Class Template Specialization
 
 ### Exercise 3.1 – Timer Driver Template
-In this exercise, you will create a timer driver that supports multiple implementations using template specialization in a file `driver/timer.h`.
+In this exercise, you will create a timer driver that supports multiple implementations using template specialization in a file `driver/timer.hpp`.
 
 The goal is to select the timer implementation at compile time based on a template parameter.
 
@@ -233,15 +233,15 @@ Failed to initialize stub timer: invalid timeout 0 ms!
 * The method `timeout_ms()` shall:
    * Return the configured timeout in milliseconds.
    * Take no parameters.
-   * Be marked `const` and `noexcept`.
+   * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `isRunning()` shall:
    * Return `true` if the timer is running; otherwise `false`.
    * Take no parameters.
-   * Be marked `const` and `noexcept`.
+   * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `isInitialized()` shall:
    * Return `true` if the timer is initialized; otherwise `false`.
    * Take no parameters.
-   * Be marked `const` and `noexcept`.
+   * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `start()` shall:
    * Start the timer if the timer is initialized.
    * Print `Starting stub timer!`.
@@ -268,7 +268,7 @@ Failed to initialize stub timer: invalid timeout 0 ms!
 * The method `hasTimedOut()` shall:
    * Return `true` when the counter has reached the timeout value; otherwise `false`.
    * Reset the counter to `0` when a timeout occurs.
-   * Be marked `noexcept`.
+   * Be marked `noexcept` and `[[nodiscard]]`.
 
 ---
 
@@ -319,7 +319,7 @@ Test the timers using the following test program in `main.cpp`:
 #include <cstdint>
 #include <thread>
 
-#include "driver/timer/timer.h"
+#include "driver/timer/timer.hpp"
 
 using namespace driver;
 

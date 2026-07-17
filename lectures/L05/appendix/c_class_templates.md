@@ -166,19 +166,19 @@ public:
     T* end() noexcept { return nullptr != myData ? myData + mySize : nullptr; }
     const T* end() const noexcept { return nullptr != myData ? myData + mySize : nullptr; }
 
-    const T* data() const noexcept 
+    [[nodiscard]] const T* data() const noexcept 
     { 
         // Return a read-only pointer to the data field.
         return myData; 
     }
 
-    std::size_t size() const noexcept 
+    [[nodiscard]] std::size_t size() const noexcept 
     {
         // Return the size of the vector. 
         return mySize; 
     }
 
-    bool empty() const noexcept 
+    [[nodiscard]] bool empty() const noexcept 
     { 
         // Return true if the vector is empty.
         return 0U == mySize; 
@@ -192,7 +192,7 @@ public:
         mySize = 0U;
     }
 
-    bool resize(const std::size_t size) noexcept
+    [[nodiscard]] bool resize(const std::size_t size) noexcept
     {
         // Clear the vector if the requested size is 0.
         if (0U == size)
@@ -213,7 +213,7 @@ public:
         return true;
     }
 
-    bool pushBack(const T& element) noexcept
+    [[nodiscard]] bool pushBack(const T& element) noexcept
     {
         const std::size_t newSize{mySize + 1U};
         // Try to reallocate the data field to fit one more element, return false on failure.
@@ -267,7 +267,7 @@ There are two common solutions:
 The most common approach is to place both declaration and implementation in the same header file, for example:
 
 ```
-include/container/vector.h
+include/container/vector.hpp
 ```
 
 Contains:
@@ -293,14 +293,14 @@ In larger projects, it is common to separate declaration and implementation into
 Structure:
 
 ```
-include/container/vector.h
-include/container/impl/vector_impl.h
+include/container/vector.hpp
+include/container/impl/vector_impl.hpp
 ```
 
-And at the end of `vector.h`:
+And at the end of `vector.hpp`:
 
 ```cpp
-#include "container/impl/vector_impl.h"
+#include "container/impl/vector_impl.hpp"
 ```
 
 This gives the same effect as option 1, but provides better structure and readability.

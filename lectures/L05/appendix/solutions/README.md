@@ -7,7 +7,7 @@ Reference implementations for the exercises in [Appendix D](../d_exercises.md).
 ## Solutions
 * [function_template/main.cpp](./function_template/main.cpp):
     * Implementation of the bit utility function templates `clear()` and `toggle()`.
-* [class_template/include/driver/timer/timer.h](./class_template/include/driver/timer/timer.h):
+* [class_template/include/driver/timer/timer.hpp](./class_template/include/driver/timer/timer.hpp):
     * Class template `driver::timer::Timer` with a primary stub implementation and a specialization for `driver::timer::Type::Stm32`.
 * [class_template/source/main.cpp](./class_template/source/main.cpp):
     * Demonstration program for the timer driver template.

@@ -1,5 +1,5 @@
 /**
- * @brief Timer driver.
+ * @file Timer driver.
  */
 #pragma once
 
@@ -58,21 +58,21 @@ public:
      *
      * @return Timeout in milliseconds.
      */
-    std::uint16_t timeout_ms() const noexcept { return myTimeout_ms; }
+    [[nodiscard]] std::uint16_t timeout_ms() const noexcept { return myTimeout_ms; }
 
     /**
      * @brief Check if the timer is running.
      *
      * @return True if running, false otherwise.
      */
-    bool isRunning() const noexcept { return myRunning; }
+    [[nodiscard]] bool isRunning() const noexcept { return myRunning; }
 
     /**
      * @brief Check whether the timer has been initialized.
      *
      * @return True if initialized, false otherwise.
      */
-    bool isInitialized() const noexcept { return myInitialized; }
+    [[nodiscard]] bool isInitialized() const noexcept { return myInitialized; }
 
     /**
      * @brief Start timer.
@@ -123,7 +123,7 @@ public:
      *
      * @return True if timed out, false otherwise.
      */
-    bool hasTimedOut() noexcept
+    [[nodiscard]] bool hasTimedOut() noexcept
     {
         const bool timeout{myTimeout_ms <= myCounter_ms};
 
@@ -191,21 +191,21 @@ public:
      *
      * @return Timeout in milliseconds.
      */
-    std::uint16_t timeout_ms() const noexcept { return myTimeout_ms; }
+    [[nodiscard]] std::uint16_t timeout_ms() const noexcept { return myTimeout_ms; }
 
     /**
      * @brief Check if the timer is running.
      *
      * @return True if running, false otherwise.
      */
-    bool isRunning() const noexcept { return myRunning; }
+    [[nodiscard]] bool isRunning() const noexcept { return myRunning; }
 
     /**
      * @brief Check whether the timer has been initialized.
      *
      * @return True if initialized, false otherwise.
      */
-    bool isInitialized() const noexcept { return myInitialized; }
+    [[nodiscard]] bool isInitialized() const noexcept { return myInitialized; }
 
     /**
      * @brief Start timer.
@@ -256,7 +256,7 @@ public:
      *
      * @return True if timed out, false otherwise.
      */
-    bool hasTimedOut() noexcept
+    [[nodiscard]] bool hasTimedOut() noexcept
     {
         const bool timeout{myTimeout_ms <= myCounter_ms};
 

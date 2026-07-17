@@ -1,5 +1,5 @@
 /**
- * @brief Bit utility function templates.
+ * @file Bit utility function templates.
  */
 #include <bitset>
 #include <cstdint>

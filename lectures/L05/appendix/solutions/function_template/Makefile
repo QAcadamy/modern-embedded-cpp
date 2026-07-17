@@ -1,5 +1,5 @@
 # Target application.
-APP := functoin_template
+APP := function_template
 
 # C++ compiler.
 CXX_COMPILER := g++
@@ -24,3 +24,5 @@ run:
 # Clean the application.
 clean:
 	@rm -f $(APP)
+
+.PHONY: default build run clean

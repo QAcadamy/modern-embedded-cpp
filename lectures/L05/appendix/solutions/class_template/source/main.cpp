@@ -1,11 +1,11 @@
 /**
- * @brief Timer driver class template demonstration.
+ * @file Timer driver class template demonstration.
  */
 #include <chrono>
 #include <cstdint>
 #include <thread>
 
-#include "driver/timer/timer.h"
+#include "driver/timer/timer.hpp"
 
 using namespace driver;
 
@@ -13,7 +13,7 @@ namespace
 {
 // -----------------------------------------------------------------------------
 template<timer::Type T>
-constexpr const char* timerType() noexcept
+[[nodiscard]] constexpr const char* timerType() noexcept
 {
     if constexpr (T == timer::Type::Stub) { return "Stub"; }
     else if (T == timer::Type::Stm32) { return "STM32"; }
