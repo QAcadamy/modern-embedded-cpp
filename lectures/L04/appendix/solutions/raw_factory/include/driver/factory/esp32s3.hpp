@@ -1,12 +1,12 @@
 /**
- * @brief ESP32-S3 factory with raw pointers.
+ * @file ESP32-S3 factory with raw pointers.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/factory/interface.h"
-#include "driver/serial/esp32s3.h"
+#include "driver/factory/interface.hpp"
+#include "driver/serial/esp32s3.hpp"
 
 namespace driver::factory
 {

@@ -1,13 +1,13 @@
 /**
- * @brief ESP32-S3 factory with smart pointers.
+ * @file ESP32-S3 factory with smart pointers.
  */
 #pragma once
 
 #include <cstdint>
 #include <memory>
 
-#include "driver/factory/interface.h"
-#include "driver/serial/esp32s3.h"
+#include "driver/factory/interface.hpp"
+#include "driver/serial/esp32s3.hpp"
 
 namespace driver::factory
 {

@@ -11,16 +11,16 @@ Makefile
 include/
     app/
         logic/
-            logic.h
+            logic.hpp
     driver/
         factory/
-            esp32s3.h
-            interface.h
-            stub.h
+            esp32s3.hpp
+            interface.hpp
+            stub.hpp
         serial/
-            esp32s3.h
-            interface.h
-            stub.h
+            esp32s3.hpp
+            interface.hpp
+            stub.hpp
 source/
     main.cpp
 ```
@@ -52,6 +52,7 @@ Add a pure virtual method `isInitialized()` that:
 * Indicates whether the driver has been initialized (`true/false`).
 * Does not modify the object (`const`).
 * Cannot throw exceptions.
+* Generates a warning if the return value is discarded (`[[nodiscard]]`).
 
 ---
 
@@ -70,6 +71,7 @@ Add a pure virtual method `read()` that:
 * Takes a reference to a variable where the byte will be stored.
 * Returns `true` if a byte was received, otherwise `false`.
 * Cannot throw exceptions.
+* Lets the caller discard the return value; the caller does not need to check whether a byte was received.
 
 ---
 
@@ -208,6 +210,7 @@ Add a pure virtual method `serial()` that:
 * Takes a receive pin number of type `std::uint8_t`.
 * Returns a pointer to `driver::serial::Interface`.
 * Is marked `noexcept`.
+* Generates a warning if the return value is discarded (`[[nodiscard]]`).
 
 ---
 
@@ -368,6 +371,8 @@ Update `driver::factory::Interface` so that the method `serial()`:
 * Still takes a transmit pin number of type `std::uint8_t`.
 * Still takes a receive pin number of type `std::uint8_t`.
 * Is marked `noexcept`.
+* Is still marked `[[nodiscard]]`: discarding the returned `std::unique_ptr` would destroy the newly
+  created object immediately.
 
 Also:
 * Include the header `<memory>` where needed.

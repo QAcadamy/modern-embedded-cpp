@@ -1,12 +1,12 @@
 /**
- * @brief Stub factory with raw pointers.
+ * @file Stub factory with raw pointers.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/factory/interface.h"
-#include "driver/serial/stub.h"
+#include "driver/factory/interface.hpp"
+#include "driver/serial/stub.hpp"
 
 namespace driver::factory
 {

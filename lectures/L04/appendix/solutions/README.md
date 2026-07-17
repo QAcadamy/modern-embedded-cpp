@@ -5,8 +5,8 @@ Reference implementations for the exercises in [Appendix C](../c_exercises.md).
 **Note!** Try to solve the exercises yourself before looking at the solutions.
 
 ## Solutions
-* [raw_factory](./raw_factory/include/app/logic/logic.h): Application logic implemented using raw pointers and a [raw-pointer factory](./raw_factory/include/driver/factory/interface.h).
-* [smart_factory](./smart_factory/include/app/logic/logic.h): Application logic implemented using smart pointers and a [smart-pointer factory](./smart_factory/include/driver/factory/interface.h).
+* [raw_factory](./raw_factory/include/app/logic/logic.hpp): Application logic implemented using raw pointers and a [raw-pointer factory](./raw_factory/include/driver/factory/interface.hpp).
+* [smart_factory](./smart_factory/include/app/logic/logic.hpp): Application logic implemented using smart pointers and a [smart-pointer factory](./smart_factory/include/driver/factory/interface.hpp).
 
 ## Selecting the factory
 The reference solution uses the `STUB` macro in `main.cpp` to switch between the ESP32-S3 factory and the stub factory. This is only for convenience and was not required by the exercise.

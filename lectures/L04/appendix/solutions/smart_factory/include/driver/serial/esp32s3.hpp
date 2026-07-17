@@ -1,12 +1,12 @@
 /**
- * @brief Serial driver for ESP32-S3.
+ * @file Serial driver for ESP32-S3.
  */
 #pragma once
 
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/serial/interface.h"
+#include "driver/serial/interface.hpp"
 
 namespace driver::serial
 {

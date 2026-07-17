@@ -1,5 +1,5 @@
 /**
- * @brief Factory interface with raw pointers.
+ * @file Factory interface with raw pointers.
  */
 #pragma once
 
@@ -32,6 +32,7 @@ public:
      *
      * @return Pointer to the serial device.
      */
-    virtual serial::Interface* serial(std::uint8_t txPin, std::uint8_t rxPin) noexcept = 0;
+    [[nodiscard]] virtual serial::Interface* serial(std::uint8_t txPin,
+                                                    std::uint8_t rxPin) noexcept = 0;
 };
 } // namespace driver::factory

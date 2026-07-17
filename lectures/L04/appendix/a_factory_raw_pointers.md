@@ -248,7 +248,7 @@ It only knows about the interfaces.
 ### Example implementation using a factory
 
 #### Step 1: Interface for GPIO
-We create a simple GPIO interface in a file `driver/gpio/interface.h`, as shown below:
+We create a simple GPIO interface in a file `driver/gpio/interface.hpp`, as shown below:
 
 ```cpp
 #pragma once
@@ -259,7 +259,7 @@ class Interface
 {
 public:
     virtual ~Interface() noexcept = default;
-    virtual bool read() const noexcept = 0;
+    [[nodiscard]] virtual bool read() const noexcept = 0;
     virtual void write(bool state) noexcept = 0;
     virtual void toggle() noexcept = 0;
 };
@@ -269,14 +269,14 @@ public:
 ---
 
 #### Step 2: Real driver
-We create a GPIO driver for the ESP32-S3 in a file `driver/gpio/esp32s3.h`, as shown below:
+We create a GPIO driver for the ESP32-S3 in a file `driver/gpio/esp32s3.hpp`, as shown below:
 
 ```cpp
 #pragma once
 
 #include <cstdint>
 
-#include "driver/gpio/interface.h"
+#include "driver/gpio/interface.hpp"
 
 namespace driver::gpio
 {
@@ -326,14 +326,14 @@ private:
 ---
 
 #### Step 3: Stub
-We create a GPIO stub in a file `driver/gpio/stub.h`, as shown below:
+We create a GPIO stub in a file `driver/gpio/stub.hpp`, as shown below:
 
 ```cpp
 #pragma once
 
 #include <cstdint>
 
-#include "driver/gpio/interface.h"
+#include "driver/gpio/interface.hpp"
 
 namespace driver::gpio
 {
@@ -343,7 +343,7 @@ public:
     Stub() noexcept
         : myState{false}
     {}
-    ~Stub() noexcept = default;
+    ~Stub() noexcept override = default;
 
     bool read() const noexcept override { return myState; }
     void write(const bool state) noexcept override { myState = state; }
@@ -363,7 +363,7 @@ private:
 ---
 
 #### Step 4: Factory interface
-We create a factory interface in a file `driver/factory/interface.h` in order to implement separate factories:
+We create a factory interface in a file `driver/factory/interface.hpp` in order to implement separate factories:
 * A factory for creating instances for ESP32-S3.
 * A factory for creating stub instances.
 
@@ -384,23 +384,27 @@ class Interface
 {
 public:
     virtual ~Interface() noexcept = default;
-    virtual gpio::Interface* gpio(std::uint8_t pin) noexcept = 0;
+    [[nodiscard]] virtual gpio::Interface* gpio(std::uint8_t pin) noexcept = 0;
 };
 } // namespace driver::factory
 ```
 
+Note that `gpio()` is marked `[[nodiscard]]`: it allocates a new object with `new` and hands ownership
+to the caller. Discarding the returned pointer would lose the only reference to that object, leaking
+it — there would be no way to `delete` it later.
+
 ---
 
 #### Step 5: Real factory
-We then create an ESP32-S3 factory in a file `driver/factory/esp32s3.h` in order to construct ESP32 instances:
+We then create an ESP32-S3 factory in a file `driver/factory/esp32s3.hpp` in order to construct ESP32 instances:
 
 ```cpp
 #pragma once
 
 #include <cstdint>
 
-#include "driver/factory/interface.h"
-#include "driver/gpio/esp32s3.h"
+#include "driver/factory/interface.hpp"
+#include "driver/gpio/esp32s3.hpp"
 
 namespace driver::factory
 {
@@ -426,15 +430,15 @@ public:
 ---
 
 #### Step 6: Stub factory
-We also create a stub factory in a file `driver/factory/stub.h` in order to construct stub instances:
+We also create a stub factory in a file `driver/factory/stub.hpp` in order to construct stub instances:
 
 ```cpp
 #pragma once
 
 #include <cstdint>
 
-#include "driver/factory/interface.h"
-#include "driver/gpio/stub.h"
+#include "driver/factory/interface.hpp"
+#include "driver/gpio/stub.hpp"
 
 namespace driver::factory
 {
@@ -462,7 +466,7 @@ public:
 ---
 
 #### Step 7: System logic using a factory
-We then create a logic class that uses a given factory to create instances, in a file `system/logic/logic.h`:
+We then create a logic class that uses a given factory to create instances, in a file `system/logic/logic.hpp`:
 * In the constructor we allocate memory for the GPIO instances `myLed` and `myButton` via the factory.
 * In the destructor we free the allocated resources, i.e. the GPIO instances — since we have allocated memory using raw pointers we are responsible for doing this ourselves.
 * In the method `run()`, `myLed` is toggled on the rising edge of the push button.
@@ -475,7 +479,7 @@ In this example, the system logic owns the driver objects. The pointers returned
 
 #include <cstdint>
 
-#include "driver/factory/interface.h"
+#include "driver/factory/interface.hpp"
 
 namespace system::logic
 {
@@ -530,8 +534,8 @@ Below is an example of how a factory could be used to run the system logic on an
 ```cpp
 #include <cstdint>
 
-#include "driver/factory/esp32s3.h"
-#include "system/logic/logic.h"
+#include "driver/factory/esp32s3.hpp"
+#include "system/logic/logic.hpp"
 
 int main()
 {
@@ -553,8 +557,8 @@ To run with stub drivers, it is sufficient to switch to the stub factory `driver
 ```cpp
 #include <cstdint>
 
-#include "driver/factory/stub.h"
-#include "system/logic/logic.h"
+#include "driver/factory/stub.hpp"
+#include "system/logic/logic.hpp"
 
 int main()
 {

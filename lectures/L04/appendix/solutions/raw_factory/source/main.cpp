@@ -1,19 +1,19 @@
 /**
- * @brief Application using a driver factory with raw pointers.
+ * @file Application using a driver factory with raw pointers.
  */
 #include <cstdint>
 
-#include "app/logic/logic.h"
+#include "app/logic/logic.hpp"
 
 // Define STUB to use stub drivers instead of ESP32-S3 drivers.
 #define STUB
 
 // Use stub drivers for testing.
 #ifdef STUB
-#include "driver/factory/stub.h"
+#include "driver/factory/stub.hpp"
 using Factory = driver::factory::Stub;
 #else
-#include "driver/factory/esp32s3.h"
+#include "driver/factory/esp32s3.hpp"
 using Factory = driver::factory::Esp32s3;
 #endif // STUB
 

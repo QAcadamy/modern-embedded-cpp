@@ -1,12 +1,12 @@
 /**
- * @brief Stub factory with smart pointers.
+ * @file Stub factory with smart pointers.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/factory/interface.h"
-#include "driver/serial/stub.h"
+#include "driver/factory/interface.hpp"
+#include "driver/serial/stub.hpp"
 
 namespace driver::factory
 {

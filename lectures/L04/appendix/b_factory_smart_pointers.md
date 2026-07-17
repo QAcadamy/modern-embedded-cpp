@@ -2,7 +2,7 @@
 
 ## Driver factory with smart pointers (Abstract Factory)
 In this appendix we further develop the factory example from 
-[Appendix A](./factory_raw_pointers.md).
+[Appendix A](./a_factory_raw_pointers.md).
 
 We replace raw pointers with smart pointers and use a simplified form of the **Abstract Factory pattern**.
 
@@ -117,12 +117,16 @@ class Interface
 public:
     virtual ~Interface() noexcept = default;
 
-    virtual std::unique_ptr<gpio::Interface> gpio(std::uint8_t pin) noexcept = 0;
+    [[nodiscard]] virtual std::unique_ptr<gpio::Interface> gpio(std::uint8_t pin) noexcept = 0;
 };
 } // namespace driver::factory
 ```
 
 The factory now returns a `std::unique_ptr` instead of a raw pointer.
+
+Note that `gpio()` is marked `[[nodiscard]]`: discarding the returned `std::unique_ptr` would destroy
+the newly created object immediately, since nothing would be left holding onto it. This is exactly
+the "factory function returning an owning resource" case mentioned back in L01.
 
 ---
 
@@ -133,8 +137,8 @@ The factory now returns a `std::unique_ptr` instead of a raw pointer.
 
 #include <memory>
 
-#include "driver/factory/interface.h"
-#include "driver/gpio/esp32s3.h"
+#include "driver/factory/interface.hpp"
+#include "driver/gpio/esp32s3.hpp"
 
 namespace driver::factory
 {
@@ -167,8 +171,8 @@ public:
 #include <cstdint>
 #include <memory>
 
-#include "driver/factory/interface.h"
-#include "driver/gpio/stub.h"
+#include "driver/factory/interface.hpp"
+#include "driver/gpio/stub.hpp"
 
 namespace driver::factory
 {
@@ -202,7 +206,7 @@ public:
 #include <cstdint>
 #include <memory>
 
-#include "driver/factory/interface.h"
+#include "driver/factory/interface.hpp"
 
 namespace system::logic
 {
@@ -258,8 +262,8 @@ passing an instance of `driver::factory::Esp32s3` to the system logic and then c
 ```cpp
 #include <cstdint>
 
-#include "driver/factory/esp32s3.h"
-#include "system/logic/logic.h"
+#include "driver/factory/esp32s3.hpp"
+#include "system/logic/logic.hpp"
 
 int main()
 {
@@ -281,8 +285,8 @@ As shown in the example factory with raw pointers, it is sufficient to switch to
 ```cpp
 #include <cstdint>
 
-#include "driver/factory/stub.h"
-#include "system/logic/logic.h"
+#include "driver/factory/stub.hpp"
+#include "system/logic/logic.hpp"
 
 int main()
 {

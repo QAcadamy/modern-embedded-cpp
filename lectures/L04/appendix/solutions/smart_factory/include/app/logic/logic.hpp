@@ -1,5 +1,5 @@
 /**
- * @brief Application logic.
+ * @file Application logic.
  */
 #pragma once
 
@@ -9,8 +9,8 @@
 #include <memory>
 #include <thread>
 
-#include "driver/factory/interface.h"
-#include "driver/serial/interface.h"
+#include "driver/factory/interface.hpp"
+#include "driver/serial/interface.hpp"
 
 namespace app::logic
 {
