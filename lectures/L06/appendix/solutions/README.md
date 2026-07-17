@@ -17,9 +17,9 @@ Reference implementations for the exercises in [Appendix B](../b_exercises.md).
     * [exercise3.cpp](./exercise3/exercise3.cpp):
         * Shared memory protected by mutex with TX and RX threads.
 * **Exercise Set 4-5**:
-    * [driver/counter/interface.h](./exercise4-5/include/driver/counter/interface.h):
+    * [driver/counter/interface.hpp](./exercise4-5/include/driver/counter/interface.hpp):
         * Pure virtual interface `driver::counter::Interface`.
-    * [driver/counter/stub.h](./exercise4-5/include/driver/counter/stub.h):
+    * [driver/counter/stub.hpp](./exercise4-5/include/driver/counter/stub.hpp):
         * Thread-safe stub counter `driver::counter::Stub` with atomic initialization state.
     * [main.cpp](./exercise4-5/source/main.cpp):
         * Demonstration and test program.

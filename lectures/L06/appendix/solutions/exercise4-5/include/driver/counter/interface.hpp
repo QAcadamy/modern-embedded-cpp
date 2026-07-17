@@ -1,5 +1,5 @@
 /**
- * @brief Counter interface.
+ * @file Counter interface.
  */
 #pragma once
 
@@ -23,7 +23,7 @@ public:
      *
      * @return True if initialized, false otherwise.
      */
-    virtual bool isInitialized() const noexcept = 0;
+    [[nodiscard]] virtual bool isInitialized() const noexcept = 0;
 
     /**
      * @brief Increment the counter by one.
@@ -35,7 +35,7 @@ public:
      *
      * @return The current counter value.
      */
-    virtual std::uint32_t value() const noexcept = 0;
+    [[nodiscard]] virtual std::uint32_t value() const noexcept = 0;
 
     /**
      * @brief Reset the counter to zero.

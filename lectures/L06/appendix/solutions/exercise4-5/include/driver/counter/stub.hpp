@@ -1,5 +1,5 @@
 /**
- * @brief Stub counter.
+ * @file Stub counter.
  */
 #pragma once
 
@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <mutex>
 
-#include "driver/counter/interface.h"
+#include "driver/counter/interface.hpp"
 
 namespace driver::counter
 {

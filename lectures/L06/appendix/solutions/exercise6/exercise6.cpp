@@ -1,5 +1,5 @@
 /**
- * @brief Multithreading solutions - Exercise Set 6.
+ * @file Multithreading solutions - Exercise Set 6.
  */
 #include <atomic>
 #include <chrono>
@@ -41,7 +41,7 @@ void sleep_ms(const std::uint16_t ms) noexcept
  *
  * @return True if new data is available or stop is set, false otherwise.
  */
-bool hasNewData(SharedMem& shared, const std::atomic<bool>& stop) noexcept
+[[nodiscard]] bool hasNewData(const SharedMem& shared, const std::atomic<bool>& stop) noexcept
 {
     return stop.load() || shared.newData;
 }

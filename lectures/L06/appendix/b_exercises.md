@@ -1,7 +1,7 @@
 # Appendix B
 
 ## Exercises
-These exercises reinforce the concepts from [Appendix A](./a_threads_mutex_atomic.md).
+These exercises reinforce the concepts from [Appendix A](./a_multithreading_synchronization.md).
 
 ---
 
@@ -220,8 +220,8 @@ Makefile
 include/
     driver/
         counter/
-            interface.h
-            stub.h
+            interface.hpp
+            stub.hpp
 source/
     main.cpp
 ```
@@ -250,7 +250,7 @@ Add a destructor that is:
 Add a pure virtual method `isInitialized()` that:
 * Returns `true` if the driver is initialized, `false` otherwise.
 * Does not modify the object.
-* Is marked `noexcept`.
+* Is marked `noexcept` and `[[nodiscard]]`.
 
 ---
 
@@ -258,7 +258,7 @@ Add a pure virtual method `isInitialized()` that:
 Add a pure virtual method `value()` that:
 * Returns the current counter value as `std::uint32_t`.
 * Does not modify the object.
-* Is marked `noexcept`.
+* Is marked `noexcept` and `[[nodiscard]]`.
 
 ---
 
@@ -420,6 +420,7 @@ Create a helper function named `hasNewData()` to use as the wake-up predicate. T
 * Take a `const SharedMem&`.
 * Take a `const std::atomic<bool>&` named `stop`.
 * Return `true` if `shared.newData` is `true` or the stop flag is set, `false` otherwise.
+* Be marked `noexcept` and `[[nodiscard]]`.
 
 Modify `txThread()` so that it calls `cv.notify_one()` after releasing the lock guard that protects the data update.
 
@@ -456,7 +457,7 @@ Create a function named `validateFirmware()`. The function shall:
 * Iterate over all bytes in `buf`.
 * Return `false` if any byte has the value `0xFFU` (unprogrammed flash).
 * Return `true` if the image is valid.
-* Be marked `noexcept`.
+* Be marked `noexcept` and `[[nodiscard]]`.
 
 In `main()`:
 * Create a buffer with some test data.

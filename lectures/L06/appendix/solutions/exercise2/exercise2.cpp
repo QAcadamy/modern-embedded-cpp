@@ -1,5 +1,5 @@
 /**
- * @brief Multithreading solutions - Exercise Set 2.
+ * @file Multithreading solutions - Exercise Set 2.
  */
 #include <atomic>
 #include <cstdint>

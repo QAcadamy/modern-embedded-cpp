@@ -1,5 +1,5 @@
 /**
- * @brief Multithreading solutions - Exercise Set 7.
+ * @file Multithreading solutions - Exercise Set 7.
  */
 #include <chrono>
 #include <cstdint>
@@ -19,7 +19,15 @@ void sleep_ms(const std::uint16_t ms) noexcept
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 }
 
-bool validateFirmware(const std::uint8_t* buf, const std::uint16_t bufLen) noexcept
+/**
+ * @brief Validate firmware.
+ *
+ * @param[in] buf Buffer holding firmware data.
+ * @param[in] bufLen Length of firmware buffer in bytes.
+ *
+ * @return True if valid, false otherwise.
+ */
+[[nodiscard]] bool validateFirmware(const std::uint8_t* buf, const std::uint16_t bufLen) noexcept
 {
     constexpr std::uint16_t flashReadDuration_ms{2000U};
     constexpr std::uint8_t unprogrammedFlash{0xFFU};

@@ -444,7 +444,7 @@ Below is an example of a checksum computation of a frame being performed while p
 namespace
 {
 // -----------------------------------------------------------------------------
-std::uint16_t computeChecksum(const std::uint8_t* buf, const std::size_t bufLen) noexcept
+[[nodiscard]] std::uint16_t computeChecksum(const std::uint8_t* buf, const std::size_t bufLen) noexcept
 {
     // Check buffer, return 0 if invalid.
     if ((nullptr == buf) || (0U == bufLen)) { return 0U; }
@@ -543,7 +543,7 @@ struct Shared
 };
 
 // -----------------------------------------------------------------------------
-bool isDataAvailable(const Shared& shared) noexcept
+[[nodiscard]] bool isDataAvailable(const Shared& shared) noexcept
 {
     // Return true if data is available or the stop flag is set.
     return !shared.queue.empty() || shared.stop.load();
@@ -729,7 +729,7 @@ struct Shared
 
 private:
     // -----------------------------------------------------------------------------
-    bool isDataAvailable() noexcept
+    [[nodiscard]] bool isDataAvailable() noexcept
     {
         // Return true if data is available or the stop flag is set.
         return !queue.empty() || stop.load();

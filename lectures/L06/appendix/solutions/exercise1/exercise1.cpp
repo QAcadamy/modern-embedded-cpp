@@ -1,5 +1,5 @@
 /**
- * @brief Multithreading solutions - Exercise Set 1.
+ * @file Multithreading solutions - Exercise Set 1.
  */
 #include <atomic>
 #include <chrono>

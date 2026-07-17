@@ -1,10 +1,10 @@
 /**
- * @brief Multithreading solutions - Exercise Set 4-5.
+ * @file Multithreading solutions - Exercise Set 4-5.
  */
 #include <cstdio>
 #include <thread>
 
-#include "driver/counter/stub.h"
+#include "driver/counter/stub.hpp"
 
 namespace
 {
