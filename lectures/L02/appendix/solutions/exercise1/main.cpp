@@ -1,11 +1,11 @@
 /**
- * @brief Solution for exercise set 1.
+ * @file Solution for exercise set 1.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/gpio/button.h"
-#include "driver/gpio/led.h"
+#include "driver/gpio/button.hpp"
+#include "driver/gpio/led.hpp"
 
 using namespace driver;
 

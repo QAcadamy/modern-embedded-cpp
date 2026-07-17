@@ -1,10 +1,10 @@
 /**
- * @brief Timer driver implementation details.
+ * @file Timer driver implementation details.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/timer.h"
+#include "driver/timer.hpp"
 
 namespace driver
 {

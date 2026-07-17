@@ -45,7 +45,7 @@ private:
 **d)** Implement the following methods directly in the class:
 * The method `isOn()` shall:
     * Return `true` if the LED is enabled, otherwise `false`.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `on()` shall:
     * Take no parameters.
     * Set the LED state to `true`.
@@ -132,10 +132,10 @@ private:
 **d)** Implement the following methods directly in the class:
 * The method `pin()` shall:
     * Return the pin number.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `isPressed()` shall:
     * Return `true` if the button is pressed, otherwise `false`.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `setPressed()` shall:
     * Take an argument of type `bool`.
     * Update the internal state of the button.
@@ -225,7 +225,7 @@ The class should be split across multiple files. Therefore, create the following
 Makefile
 include/
     driver/
-        buzzer.h
+        buzzer.hpp
 source/
     driver/
         buzzer.cpp
@@ -233,12 +233,12 @@ source/
 ```
 
 **Note!**
-* All method declarations shall be written in `driver/buzzer.h`.
+* All method declarations shall be written in `driver/buzzer.hpp`.
 * All method definitions shall be implemented in `driver/buzzer.cpp`.
 
 ---
 
-In the header file `driver/buzzer.h`, the class shall be declared according to the structure below:
+In the header file `driver/buzzer.hpp`, the class shall be declared according to the structure below:
 
 ```cpp
 #pragma once
@@ -285,11 +285,11 @@ Releasing resources allocated for buzzer at pin 8!
 **d)** Declare the following methods in the header file and implement them in `driver/buzzer.cpp`:
 * The method `pin()` shall:
     * Return the pin number to which the buzzer is connected.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `isEnabled()` shall:
     * Return `true` if the buzzer is enabled, otherwise `false`.
     * Take no parameters.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `enable()` shall:
     * Set the buzzer state to `true`.
     * Take no parameters.
@@ -349,12 +349,12 @@ In this exercise, you will create a class `Timer` in the namespace `driver`.
 The class should be split across multiple files. Therefore, create the following files in the same project as the previous exercise:
 
 ```text
-include/driver/timer.h
+include/driver/timer.hpp
 source/driver/timer.cpp
 ```
 
 **Note!**
-* All method declarations shall be written in `driver/timer.h`.
+* All method declarations shall be written in `driver/timer.hpp`.
 * All method definitions shall be implemented in `driver/timer.cpp`.
 
 In the header file, the class shall be declared according to the structure below:
@@ -417,15 +417,15 @@ Stopping timer before deletion!
 * The method `timeout_ms()` shall:
     * Return the configured timeout in milliseconds.
     * Take no parameters.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `isRunning()` shall:
     * Return `true` if the timer is running, otherwise `false`.
     * Take no parameters.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `isInitialized()` shall:
     * Return `true` if the timer is initialized, otherwise `false`.
     * Take no parameters.
-    * Be marked `const` and `noexcept`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * The method `start()` shall:
     * Start the timer if the timer is initialized.
     * Take no parameters.
@@ -449,7 +449,7 @@ Stopping timer before deletion!
 * The method `hasTimedOut()` shall:
     * Return `true` when the counter has reached the timeout value, otherwise `false`.
     * Reset the counter to `0` when a timeout occurs.
-    * Be marked `noexcept`.
+    * Be marked `noexcept` and `[[nodiscard]]`.
 
 **e)** Delete the following methods:
 * The default constructor.

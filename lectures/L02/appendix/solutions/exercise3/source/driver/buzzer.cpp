@@ -1,10 +1,10 @@
 /**
- * @brief Buzzer driver implementation details.
+ * @file Buzzer driver implementation details.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/buzzer.h"
+#include "driver/buzzer.hpp"
 
 namespace driver
 {

@@ -86,7 +86,7 @@ The enumeration class above is used to specify whether a pin should be:
 We can also easily check whether a given enumerator `direction` is valid by ensuring that it has a numeric value that is less than `Direction::Count`:
 
 ```cpp
-constexpr bool isDirectionValid(const Direction direction) noexcept
+[[nodiscard]] constexpr bool isDirectionValid(const Direction direction) noexcept
 {
     return static_cast<std::uint8_t>(Direction::Count) > static_cast<std::uint8_t>(direction);
 }
@@ -345,7 +345,7 @@ Below is the method `read()`, which returns the current state of the pin:
  *
  * @return Current GPIO state.
  */
-bool read() const noexcept { return myState; }
+[[nodiscard]] bool read() const noexcept { return myState; }
 ```
 
 Note that we write the keyword `const` directly after the function header, since we ensure that the class contents can only be read. This means that we cannot accidentally modify any of the class members.
@@ -455,7 +455,7 @@ public:
      *
      * @return Current GPIO state.
      */
-    bool read() const noexcept { return myState; }
+    [[nodiscard]] bool read() const noexcept { return myState; }
 
     /**
      * @brief Toggle the GPIO state.
@@ -492,9 +492,9 @@ private:
 Objects of many different classes are often used in a program. These classes are also often larger than the class we have seen here. It is therefore impractical to implement all classes in a single file.
 
 Typically, a header file dedicated to a specific class is created, including public enumeration classes. For example:
-* The class `Gpio` and the enumeration class `Direction` in the namespace `driver::gpio` should be implemented via the header files `gpio.h` and `direction.h` in the directory `driver/gpio`. The file paths would then be:
-    * `driver/gpio/direction.h`
-    * `driver/gpio/gpio.h`
+* The class `Gpio` and the enumeration class `Direction` in the namespace `driver::gpio` should be implemented via the header files `gpio.hpp` and `direction.hpp` in the directory `driver/gpio`. The file paths would then be:
+    * `driver/gpio/direction.hpp`
+    * `driver/gpio/gpio.hpp`
 
 At the top of each header file, we place the directive `#pragma once`, which ensures that we do not accidentally define multiple copies of the contents of the header file if it is included in multiple files, in the same way that header guards work in C. It prevents the same header file from being included multiple times in the same translation unit (a source file together with all included header files):
 
@@ -508,12 +508,12 @@ We also include `<cstdint>` to gain access to data types such as `std::uint8_t`:
 #include <cstdint>
 ```
 
-**File `driver/gpio/direction.h`:**  
+**File `driver/gpio/direction.hpp`:**  
 We implement the enumeration class `Direction` in this file:
 
 ```cpp
 /**
- * @brief GPIO direction configurations.
+ * @file GPIO direction configurations.
  */
 #pragma once
 
@@ -534,18 +534,18 @@ enum class Direction : std::uint8_t
 } // namespace driver::gpio
 ```
 
-**File `driver/gpio/gpio.h`:**  
-We implement the class `Gpio` in this file. Since the enumeration class `Direction` is used directly in this file, `driver/gpio/direction.h` is included:
+**File `driver/gpio/gpio.hpp`:**  
+We implement the class `Gpio` in this file. Since the enumeration class `Direction` is used directly in this file, `driver/gpio/direction.hpp` is included:
 
 ```cpp
 /**
- * @brief GPIO driver implementation.
+ * @file GPIO driver implementation.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/gpio/direction.h"
+#include "driver/gpio/direction.hpp"
 
 namespace driver::gpio
 {
@@ -592,7 +592,7 @@ public:
      *
      * @return Current GPIO state.
      */
-    bool read() const noexcept { return myState; }
+    [[nodiscard]] bool read() const noexcept { return myState; }
 
     /**
      * @brief Toggle the GPIO state.
@@ -624,20 +624,20 @@ private:
 } // namespace driver::gpio
 ```
 **Method definitions in the file `driver/gpio/gpio.cpp`:**  
-Class method definitions are often placed in a separate source file to keep the header file more readable. For example, to keep the file `driver/gpio/gpio.h` readable, we can place the method definitions in a source file named `driver/gpio/gpio.cpp`.
+Class method definitions are often placed in a separate source file to keep the header file more readable. For example, to keep the file `driver/gpio/gpio.hpp` readable, we can place the method definitions in a source file named `driver/gpio/gpio.cpp`.
 
 At the top of this source file, we include the following header files:
 * `<cstdint>` to gain access to data types such as `std::uint8_t`.
-* `driver/gpio/gpio.h` to gain access to the class definition.
-* `driver/gpio/direction.h` to gain access to the enumeration class `Direction`.
+* `driver/gpio/gpio.hpp` to gain access to the class definition.
+* `driver/gpio/direction.hpp` to gain access to the enumeration class `Direction`.
 
-**Note**: Both `<cstdint>` and `driver/gpio/direction.h` are included indirectly via `driver/gpio/gpio.h`, but to follow good practice we should not rely on indirect dependencies.
+**Note**: Both `<cstdint>` and `driver/gpio/direction.hpp` are included indirectly via `driver/gpio/gpio.hpp`, but to follow good practice we should not rely on indirect dependencies.
 
 ```cpp
 #include <cstdint>
 
-#include "driver/gpio/direction.h"
-#include "driver/gpio/gpio.h"
+#include "driver/gpio/direction.hpp"
+#include "driver/gpio/gpio.hpp"
 ```
 We then place the method definitions from the class `Gpio` in this file.  
 We therefore copy all methods from the class `Gpio` into this file. It is worth noting that:
@@ -645,9 +645,10 @@ We therefore copy all methods from the class `Gpio` into this file. It is worth 
 * For the compiler to understand that each method belongs to the class `Gpio`, we must use the prefix `Gpio`. For example, the method `write()` must be defined as `Gpio::write()`.
 * Default values for input arguments should only be written in the method declaration in the header file.
 * Keywords placed before method names, such as `explicit`, should not be included in the method definition.
+* Attributes such as `[[nodiscard]]` should also only be written on the method declaration in the header file — the definition in the source file does not need to repeat it.
 * Constructors, destructors, and similar functions marked with `default` or `delete` do not need to be placed in the source file.
 
-We begin with the method `write()`. In the header file `driver/gpio/gpio.h`, we keep the method header together with its documentation:
+We begin with the method `write()`. In the header file `driver/gpio/gpio.hpp`, we keep the method header together with its documentation:
 
 ```cpp
 /**
@@ -677,12 +678,12 @@ After adding all method definitions, the file `driver/gpio/gpio.cpp` looks like 
 
 ```cpp
 /**
- * @brief GPIO driver implementation details.
+ * @file GPIO driver implementation details.
  */
 #include <cstdint>
 
-#include "driver/gpio/direction.h"
-#include "driver/gpio/gpio.h"
+#include "driver/gpio/direction.hpp"
+#include "driver/gpio/gpio.hpp"
 
 namespace driver::gpio
 {
@@ -716,20 +717,20 @@ void Gpio::toggle() noexcept
 } // namespace driver::gpio
 ```
 
-**File `driver/gpio/gpio.h`**  
-The readability of the header file `driver/gpio/gpio.h` now increases, since we have removed a large part of the implementation details by moving the method definitions:
+**File `driver/gpio/gpio.hpp`**  
+The readability of the header file `driver/gpio/gpio.hpp` now increases, since we have removed a large part of the implementation details by moving the method definitions:
 * However, we must still keep the method declarations and the definitions of the member variables inside the class.
 * We remove the keyword `const` from parameters passed *by value* to improve readability; marking these as `const` only has an effect in the function definition.
 
 ```cpp
 /**
- * @brief GPIO driver implementation.
+ * @file GPIO driver implementation.
  */
 #pragma once
 
 #include <cstdint>
 
-#include "driver/gpio/direction.h"
+#include "driver/gpio/direction.hpp"
 
 namespace driver::gpio
 {
@@ -765,7 +766,7 @@ public:
      *
      * @return Current GPIO state.
      */
-    bool read() const noexcept;
+    [[nodiscard]] bool read() const noexcept;
 
     /**
      * @brief Toggle the GPIO state.

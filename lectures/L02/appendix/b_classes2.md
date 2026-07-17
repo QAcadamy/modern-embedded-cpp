@@ -17,7 +17,7 @@ public:
     {}
 
     void setEnabled(const bool state) noexcept { myState = state; }
-    bool isEnabled() const noexcept { return myState; }
+    [[nodiscard]] bool isEnabled() const noexcept { return myState; }
 
 private:
     const std::uint8_t myPin;
@@ -91,7 +91,7 @@ public:
     {}
 
     void setEnabled(const bool state) noexcept { myState = state; }
-    bool isEnabled() const noexcept { return myState; }
+    [[nodiscard]] bool isEnabled() const noexcept { return myState; }
 
 private:
     const std::uint8_t myPin;
@@ -100,6 +100,120 @@ private:
 ```
 
 After marking the constructor `explicit`, the previous code example would have produced a compilation error.
+
+---
+
+### `static` Members
+So far, every method and member variable we have seen belongs to a specific object: `myPin` and
+`myState` each have a different value for every `Gpio` instance, and `read()` operates on one
+particular instance's state. The keyword `static` lets a member instead belong to the *class
+itself*, shared by every instance rather than duplicated per object.
+
+In this section we continue using the class `Gpio`.
+
+---
+
+#### Static methods
+A static method is called through the class name, using the scope resolution operator `::`,
+rather than through an object:
+
+```cpp
+Gpio::instanceCount();
+```
+
+Because a static method has no associated object, it has no `this` pointer and therefore cannot
+access non-static (instance) members such as `myState`. It can only access other `static` members.
+
+We add a static method `instanceCount()` that reports how many `Gpio` instances currently exist:
+
+```cpp
+/**
+ * @brief Get the number of currently active GPIO instances.
+ *
+ * @return Number of active GPIO instances.
+ */
+[[nodiscard]] static std::uint8_t instanceCount() noexcept { return ourInstanceCount; }
+```
+
+**Note**: A static method can technically also be called through an object, for example
+`led1.instanceCount()`, but this is discouraged; it misleadingly suggests that the result depends
+on `led1`, when it does not.
+
+---
+
+#### Static data members
+A static data member is shared by all instances of the class, instead of each object storing its
+own copy. We use the prefix `our` for private static members, the same way `my` is used for
+private instance members; both exist to avoid name collisions with methods.
+
+**`static constexpr`** is used for a compile-time constant shared by the class, for example the
+maximum number of `Gpio` instances supported by the target MCU:
+
+```cpp
+/** Maximum number of GPIO instances supported by this MCU. */
+static constexpr std::uint8_t MaxInstances{40U};
+```
+
+**Note**: Unlike regular `camelCase` members and methods, a `static constexpr` member is named
+starting with a capital letter, for example `MaxInstances` rather than `maxInstances`. Some C++
+style guides instead use a `k` prefix for this (`kMaxInstances`); this course uses a leading
+capital letter.
+
+Since C++17, a `static constexpr` data member is implicitly `inline`. This means `MaxInstances`
+needs no separate definition in a source file. Unlike the plain `static` member shown next, it can
+be fully declared and initialized directly inside the class.
+
+A **plain `static`** member is used instead when the shared value must change at runtime, for
+example a counter tracking how many `Gpio` instances currently exist:
+
+```cpp
+private:
+    static std::uint8_t ourInstanceCount;
+```
+
+Unlike `static constexpr`, a plain `static` member must be defined exactly once in a source
+file, or the linker fails:
+
+```cpp
+std::uint8_t Gpio::ourInstanceCount{0U};
+```
+
+We update the constructor and destructor to keep `ourInstanceCount` accurate:
+
+```cpp
+Gpio::Gpio(const std::uint8_t pin, const Direction direction, const bool initialState) noexcept
+    : myPin{pin}
+    , myDirection{direction}
+    , myState{initialState}
+{
+    ++ourInstanceCount;
+}
+
+Gpio::~Gpio() noexcept
+{
+    --ourInstanceCount;
+}
+```
+
+**Note**: This is more than a bookkeeping exercise. Recall from the Recommendation below that a
+`Gpio` object represents a unique physical pin — `ourInstanceCount` combined with `MaxInstances`
+gives the constructor a way to actually enforce that limit, refusing to create more `Gpio`
+instances than the MCU has physical pins for.
+
+We can now query the shared instance count without needing any particular `Gpio` object:
+
+```cpp
+int main()
+{
+    Gpio led{13U, Direction::Output};
+    std::printf("Active GPIO instances: %u\n", Gpio::instanceCount());
+    return 0;
+}
+```
+
+```
+Active GPIO instances: 1
+```
 
 ---
 
@@ -157,6 +271,7 @@ For a simple class such as `Gpio`, where we only store small built-in types, the
 
 ```cpp
 #include <utility>
+
 // Create led1.
 Gpio led1{13U, Direction::Output};
 

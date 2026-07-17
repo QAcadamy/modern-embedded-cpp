@@ -1,10 +1,10 @@
 /**
- * @brief Solution for exercise set 3.
+ * @file Solution for exercise set 3.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/buzzer.h"
+#include "driver/buzzer.hpp"
 
 namespace
 {

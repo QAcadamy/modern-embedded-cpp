@@ -1,5 +1,5 @@
 /**
- * @brief Buzzer driver.
+ * @file Buzzer driver.
  */
 #pragma once
 
@@ -33,14 +33,14 @@ public:
      *
      * @return The buzzer pin number.
      */
-    std::uint8_t pin() const noexcept;
+    [[nodiscard]] std::uint8_t pin() const noexcept;
 
     /**
      * @brief Check if the buzzer is enabled.
      *
      * @return True if the buzzer is enabled, false otherwise.
      */
-    bool isEnabled() const noexcept;
+    [[nodiscard]] bool isEnabled() const noexcept;
 
     /**
      * @brief Enable the buzzer.

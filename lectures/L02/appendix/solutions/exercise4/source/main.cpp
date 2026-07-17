@@ -1,10 +1,10 @@
 /**
- * @brief Solution for exercise set 4.
+ * @file Solution for exercise set 4.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/timer.h"
+#include "driver/timer.hpp"
 
 namespace
 {

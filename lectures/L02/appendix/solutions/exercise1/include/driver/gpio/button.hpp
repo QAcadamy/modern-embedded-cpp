@@ -1,5 +1,5 @@
 /**
- * @brief Button driver.
+ * @file Button driver.
  */
 #pragma once
 
@@ -30,14 +30,14 @@ public:
      *
      * @return The button pin number.
      */
-    std::uint8_t pin() const noexcept { return myPin; }
+    [[nodiscard]] std::uint8_t pin() const noexcept { return myPin; }
 
     /**
      * @brief Check if the button is pressed.
      *
      * @return True if the button is pressed, false otherwise.
      */
-    bool isPressed() const noexcept { return myPressed; }
+    [[nodiscard]] bool isPressed() const noexcept { return myPressed; }
 
     /**
      * @brief Set button state.

@@ -1,5 +1,5 @@
 /**
- * @brief Timer driver.
+ * @file Timer driver.
  */
 #pragma once
 
@@ -32,21 +32,21 @@ public:
      *
      * @return Timeout in milliseconds.
      */
-    std::uint32_t timeout_ms() const noexcept;
+    [[nodiscard]] std::uint32_t timeout_ms() const noexcept;
 
     /**
      * @brief Check if the timer is running.
      *
      * @return True if the timer is running, false otherwise.
      */
-    bool isRunning() const noexcept;
+    [[nodiscard]] bool isRunning() const noexcept;
 
     /**
      * @brief Check if the timer is initialized.
      *
      * @return True if the timer is initialized, false otherwise.
      */
-    bool isInitialized() const noexcept;
+    [[nodiscard]] bool isInitialized() const noexcept;
 
     /**
      * @brief Start the timer.
@@ -73,7 +73,7 @@ public:
      *
      * @return True if the timer has timed out, false otherwise.
      */
-    bool hasTimedOut() noexcept;
+    [[nodiscard]] bool hasTimedOut() noexcept;
 
     Timer()                        = delete; // No default constructor.
     Timer(const Timer&)            = delete; // No copy constructor.

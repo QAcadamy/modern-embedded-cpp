@@ -1,5 +1,5 @@
 /**
- * @brief LED driver.
+ * @file LED driver.
  */
 #pragma once
 
@@ -36,7 +36,7 @@ public:
      *
      * @return True if the LED is on, false otherwise.
      */
-    bool isOn() const noexcept { return myState; }
+    [[nodiscard]] bool isOn() const noexcept { return myState; }
 
     /**
      * @brief Enable the LED.
