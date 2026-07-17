@@ -24,13 +24,17 @@ Erik Pihl ([erik.axel.pihl@gmail.com](mailto:erik.axel.pihl@gmail.com))
 Introduction to modern C++ in embedded systems.
 
 Topics include:
+* `.h` vs `.hpp` header conventions
+* `extern "C"` and `#ifdef __cplusplus`
 * Namespaces
 * Keywords `constexpr` and `noexcept`
 * Default arguments
 * Structs with member functions
 * References
+* The `auto` keyword
 * Function templates
 * Parameter packs
+* `[[nodiscard]]`
 
 ---
 
@@ -41,6 +45,7 @@ Topics include:
 * Classes vs structs
 * Constructors and destructors
 * Keywords `explicit`, `final`, `default`, and `delete`
+* `static` methods and `static constexpr` members
 * Copy and move constructors
 * Copy and move assignment operators
 * Object lifetime
@@ -69,6 +74,7 @@ Topics include:
 * Dependency management
 * Decoupling system logic from hardware
 * Using factories with interfaces
+* Smart pointers (`std::unique_ptr`) vs raw pointers
 
 ---
 
@@ -80,6 +86,7 @@ Topics include:
 * Function templates
 * Class templates
 * Template instantiation (how the compiler generates code)
+* Template specialization
 * Code size considerations (impact in embedded systems)
 * Type traits (compile-time type checks)
 * Parameter packs (advanced)
@@ -94,7 +101,9 @@ Topics include:
 * Mutexes
 * Atomic variables
 * Lock guards
-* Synchronization primitives
+* `std::condition_variable`
+* `std::future` and `std::async`
+* Priority inversion
 * Thread-safe design
 
 ---
@@ -105,7 +114,7 @@ Topics include:
 The course material consists of:
 * Lecture notes
 * Code examples
-* Exercises completed during the lectures
+* Exercises completed after the lectures
 
 ---
 

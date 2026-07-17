@@ -60,6 +60,7 @@ After completing the course, participants should be able to:
 ## Structure
 
 ```text
+ci/          CI scripts (build and format checks)
 info/        Course info
 lectures/    Lecture plans, examples, and exercises
 ```
