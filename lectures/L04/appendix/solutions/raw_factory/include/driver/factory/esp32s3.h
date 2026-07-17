@@ -12,7 +12,7 @@ namespace driver::factory
 {
 /**
  * @brief ESP32-S3 factory with raw pointers.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Esp32s3 final : public Interface
@@ -30,10 +30,10 @@ public:
 
     /**
      * @brief Create serial driver.
-     * 
+     *
      * @param[in] txPin Transfer pin number.
      * @param[in] rxPin Receive pin number.
-     * 
+     *
      * @return Pointer to the serial device.
      */
     serial::Interface* serial(const std::uint8_t txPin, const std::uint8_t rxPin) noexcept override

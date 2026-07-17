@@ -11,7 +11,7 @@ namespace
 {
 /**
  * @brief Halt the running thread.
- * 
+ *
  * @param[in] ms Sleep duration in milliseconds.
  */
 void sleep_ms(const std::uint16_t ms) noexcept
@@ -25,7 +25,7 @@ void sleep_ms(const std::uint16_t ms) noexcept
  * @param[in] printSpeed_ms Delay between prints in milliseconds.
  * @param[in] stop Atomic flag; thread exits when set to true.
  */
-void workerThread( const std::uint16_t printSpeed_ms, const std::atomic<bool>& stop) noexcept
+void workerThread(const std::uint16_t printSpeed_ms, const std::atomic<bool>& stop) noexcept
 {
     while (!stop.load())
     {

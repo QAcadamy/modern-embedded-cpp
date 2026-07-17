@@ -29,7 +29,7 @@ void printState(const gpio::Button& button) noexcept
 
 /**
  * @brief Create and use GPIO devices.
- * 
+ *
  * @return Exit status (0 = success).
  */
 int main()
@@ -40,7 +40,7 @@ int main()
     // ------------------------------ Exercise 1.1 ---------------------------------
     gpio::Led led{ledPin};
     printState(led);
-    
+
     led.on();
     printState(led);
 

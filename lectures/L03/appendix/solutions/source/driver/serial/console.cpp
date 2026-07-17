@@ -33,10 +33,10 @@ void Console::write(const std::uint8_t byte) noexcept
 }
 
 // -----------------------------------------------------------------------------
-bool Console::read(std::uint8_t& byte) noexcept 
+bool Console::read(std::uint8_t& byte) noexcept
 {
     // Reading is not supported in this implementation.
-    (void) (byte);
+    (void)(byte);
     return false;
 }
 } // namespace driver::serial

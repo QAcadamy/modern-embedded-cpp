@@ -12,7 +12,7 @@ namespace driver::factory
 {
 /**
  * @brief Stub factory with smart pointers.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Stub final : public Interface
@@ -30,17 +30,17 @@ public:
 
     /**
      * @brief Create serial driver.
-     * 
+     *
      * @param[in] txPin Transfer pin number.
      * @param[in] rxPin Receive pin number.
-     * 
+     *
      * @return Pointer to the serial device.
      */
-    std::unique_ptr<serial::Interface> serial(
-        const std::uint8_t txPin, const std::uint8_t rxPin) noexcept override
+    std::unique_ptr<serial::Interface> serial(const std::uint8_t txPin,
+                                              const std::uint8_t rxPin) noexcept override
     {
-        (void) (txPin);
-        (void) (rxPin);
+        (void)(txPin);
+        (void)(rxPin);
         return std::make_unique<serial::Stub>();
     }
 

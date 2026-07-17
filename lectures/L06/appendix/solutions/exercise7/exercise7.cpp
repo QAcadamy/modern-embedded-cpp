@@ -11,7 +11,7 @@ namespace
 {
 /**
  * @brief Halt the running thread.
- * 
+ *
  * @param[in] ms Sleep duration in milliseconds.
  */
 void sleep_ms(const std::uint16_t ms) noexcept
@@ -46,7 +46,7 @@ bool validateFirmware(const std::uint8_t* buf, const std::uint16_t bufLen) noexc
 int main()
 {
     constexpr std::uint16_t pollSpeed_ms{200U};
-    const std::uint8_t firmware[]{0x32U, 0xAFU, 0x07U, 0x55U, 0x00U, 
+    const std::uint8_t firmware[]{0x32U, 0xAFU, 0x07U, 0x55U, 0x00U,
                                   0xFEU, 0xEFU, 0xA1U, 0x47U, 0x63U};
     const auto fwLen = static_cast<std::uint16_t>(sizeof(firmware) / sizeof(firmware[0U]));
 

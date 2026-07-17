@@ -8,7 +8,7 @@ namespace debug
 {
 /**
  * @brief Log message.
- * 
+ *
  * @param[in] message The message to log.
  * @param[in] level Log level (default = 0).
  */
@@ -22,7 +22,7 @@ namespace system
 {
 /**
  * @brief Generate a software delay.
- * 
+ *
  * @param[in] ms Duration in milliseconds (approximate, software-based delay).
  */
 void delay_ms(const std::uint32_t ms = 1U) noexcept
@@ -42,7 +42,7 @@ void delay_ms(const std::uint32_t ms = 1U) noexcept
 
 /**
  * @brief Print two debug logs with a short delay in between.
- * 
+ *
  * @return Exit status (0 = success).
  */
 int main()

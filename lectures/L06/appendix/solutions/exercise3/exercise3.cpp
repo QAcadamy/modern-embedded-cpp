@@ -24,7 +24,7 @@ struct SharedMem
 
 /**
  * @brief Halt the running thread.
- * 
+ *
  * @param[in] ms Sleep duration in milliseconds.
  */
 void sleep_ms(const std::uint16_t ms) noexcept

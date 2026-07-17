@@ -12,7 +12,7 @@ namespace driver::serial
 {
 /**
  * @brief Serial driver for ESP32-S3.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Esp32s3 final : public Interface
@@ -20,7 +20,7 @@ class Esp32s3 final : public Interface
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] txPin Transfer pin number.
      * @param[in] rxPin Receive pin number.
      */
@@ -36,14 +36,14 @@ public:
 
     /**
      * @brief Check if the serial driver has been initialized.
-     * 
+     *
      * @return True if initialized, false otherwise.
      */
     bool isInitialized() const noexcept override { return true; }
 
     /**
      * @brief Transmit one byte of data.
-     * 
+     *
      * @param[in] byte Byte to transmit.
      */
     void write(const std::uint8_t byte) noexcept override
@@ -53,14 +53,14 @@ public:
 
     /**
      * @brief Receive one byte of data.
-     * 
+     *
      * @param[out] byte Received byte (if any).
-     * 
+     *
      * @return True if a byte was received, false otherwise.
      */
     bool read(std::uint8_t& byte) noexcept override
     {
-        (void) (byte);
+        (void)(byte);
         return false;
     }
 

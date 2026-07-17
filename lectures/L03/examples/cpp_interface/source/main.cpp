@@ -24,7 +24,7 @@ void blinkLed(driver::led::Interface& led, const std::uint16_t blinkTimeMs) noex
     // Toggle the LED, then delay the calling thread.
     led.toggle();
     delayMs(blinkTimeMs);
-    
+
     // Toggle the LED again, then delay the calling thread.
     led.toggle();
     delayMs(blinkTimeMs);
@@ -33,7 +33,7 @@ void blinkLed(driver::led::Interface& led, const std::uint16_t blinkTimeMs) noex
 
 /**
  * @brief Blink LEDs connected to different microprocessors.
- * 
+ *
  * @return 0 on termination of the program.
  */
 int main()
@@ -47,10 +47,10 @@ int main()
     // Blink the LEDs ten times, then terminate the program.
     constexpr std::uint16_t iterations{10U};
 
-    for (std::uint16_t i{}; i < iterations; ++i) 
-    { 
+    for (std::uint16_t i{}; i < iterations; ++i)
+    {
         blinkLed(led1, 1000U);
-        blinkLed(led2, 500U); 
+        blinkLed(led2, 500U);
     }
     return 0;
 }

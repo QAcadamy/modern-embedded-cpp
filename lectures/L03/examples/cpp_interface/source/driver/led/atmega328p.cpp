@@ -14,15 +14,15 @@ Atmega328p::Atmega328p(const std::uint8_t pin) noexcept
     , myIsEnabled{false}
 {
     // Insert code to initialize the hardware here.
-    std::cout << "Initializing LED connected to pin " << static_cast<int>(myPin) 
+    std::cout << "Initializing LED connected to pin " << static_cast<int>(myPin)
               << " on processor ATmega328P!\n";
 }
 
 // -----------------------------------------------------------------------------
-Atmega328p::~Atmega328p() noexcept 
+Atmega328p::~Atmega328p() noexcept
 {
     // Insert code to release allocated resources here.
-    std::cout << "Deleting LED connected to pin " << static_cast<int>(myPin) 
+    std::cout << "Deleting LED connected to pin " << static_cast<int>(myPin)
               << " on processor ATmega328p!\n";
 }
 
@@ -33,7 +33,7 @@ std::uint8_t Atmega328p::pin() const noexcept { return myPin; }
 bool Atmega328p::isEnabled() const noexcept { return myIsEnabled; }
 
 // -----------------------------------------------------------------------------
-void Atmega328p::setEnabled(const bool enable) noexcept 
+void Atmega328p::setEnabled(const bool enable) noexcept
 {
     // Insert code to enable the LED here.
     myIsEnabled = enable;

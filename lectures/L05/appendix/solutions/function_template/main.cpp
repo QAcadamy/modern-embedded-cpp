@@ -19,8 +19,8 @@ namespace
 template<typename T>
 constexpr void clear(T& reg, const std::uint8_t bit) noexcept
 {
-    static_assert(std::is_arithmetic<T>::value, 
-        "Cannot perform bit operation with non-integral type!");
+    static_assert(std::is_arithmetic<T>::value,
+                  "Cannot perform bit operation with non-integral type!");
     reg &= ~(static_cast<T>(1) << bit);
 }
 
@@ -36,9 +36,9 @@ constexpr void clear(T& reg, const std::uint8_t bit) noexcept
 template<typename T, typename... Bits>
 constexpr void toggle(T& reg, const Bits... bits) noexcept
 {
-    static_assert(std::is_arithmetic<T>::value, 
-        "Cannot perform bit operation with non-integral type!");
-    
+    static_assert(std::is_arithmetic<T>::value,
+                  "Cannot perform bit operation with non-integral type!");
+
     for (const auto bit : {bits...})
     {
         reg ^= (static_cast<T>(1) << bit);

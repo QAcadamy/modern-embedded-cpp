@@ -28,7 +28,7 @@ class Timer final
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] timeout_ms Timeout in milliseconds. Must be greater than 0.
      */
     explicit Timer(const std::uint16_t timeout_ms) noexcept
@@ -37,14 +37,11 @@ public:
         , myRunning{false}
         , myInitialized{0U < timeout_ms}
     {
-        if (myInitialized) 
-        { 
-            std::printf("Created stub timer with timeout %u ms!\n", myTimeout_ms); 
+        if (myInitialized)
+        {
+            std::printf("Created stub timer with timeout %u ms!\n", myTimeout_ms);
         }
-        else
-        { 
-            std::printf("Failed to initialize stub timer: invalid timeout 0 ms!\n");
-        }
+        else { std::printf("Failed to initialize stub timer: invalid timeout 0 ms!\n"); }
     }
 
     /**
@@ -58,21 +55,21 @@ public:
 
     /**
      * @brief Get timeout.
-     * 
+     *
      * @return Timeout in milliseconds.
      */
     std::uint16_t timeout_ms() const noexcept { return myTimeout_ms; }
 
     /**
      * @brief Check if the timer is running.
-     * 
+     *
      * @return True if running, false otherwise.
      */
     bool isRunning() const noexcept { return myRunning; }
 
     /**
      * @brief Check whether the timer has been initialized.
-     * 
+     *
      * @return True if initialized, false otherwise.
      */
     bool isInitialized() const noexcept { return myInitialized; }
@@ -118,15 +115,12 @@ public:
      */
     void tick() noexcept
     {
-        if (myInitialized && myRunning)
-        {
-            myCounter_ms++;
-        }
+        if (myInitialized && myRunning) { myCounter_ms++; }
     }
 
     /**
      * @brief Check if the timer has timed out.
-     * 
+     *
      * @return True if timed out, false otherwise.
      */
     bool hasTimedOut() noexcept
@@ -167,7 +161,7 @@ class Timer<Type::Stm32> final
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] timeout_ms Timeout in milliseconds. Must be greater than 0.
      */
     explicit Timer(const std::uint16_t timeout_ms) noexcept
@@ -176,14 +170,11 @@ public:
         , myRunning{false}
         , myInitialized{0U < timeout_ms}
     {
-        if (myInitialized) 
-        { 
-            std::printf("Created STM32 timer with timeout %u ms!\n", myTimeout_ms); 
+        if (myInitialized)
+        {
+            std::printf("Created STM32 timer with timeout %u ms!\n", myTimeout_ms);
         }
-        else
-        { 
-            std::printf("Failed to initialize STM32 timer: invalid timeout 0 ms!\n");
-        }
+        else { std::printf("Failed to initialize STM32 timer: invalid timeout 0 ms!\n"); }
     }
 
     /**
@@ -197,21 +188,21 @@ public:
 
     /**
      * @brief Get timeout.
-     * 
+     *
      * @return Timeout in milliseconds.
      */
     std::uint16_t timeout_ms() const noexcept { return myTimeout_ms; }
 
     /**
      * @brief Check if the timer is running.
-     * 
+     *
      * @return True if running, false otherwise.
      */
     bool isRunning() const noexcept { return myRunning; }
 
     /**
      * @brief Check whether the timer has been initialized.
-     * 
+     *
      * @return True if initialized, false otherwise.
      */
     bool isInitialized() const noexcept { return myInitialized; }
@@ -257,15 +248,12 @@ public:
      */
     void tick() noexcept
     {
-        if (myInitialized && myRunning)
-        {
-            myCounter_ms++;
-        }
+        if (myInitialized && myRunning) { myCounter_ms++; }
     }
 
     /**
      * @brief Check if the timer has timed out.
-     * 
+     *
      * @return True if timed out, false otherwise.
      */
     bool hasTimedOut() noexcept
@@ -273,10 +261,7 @@ public:
         const bool timeout{myTimeout_ms <= myCounter_ms};
 
         // Clear the internal counter on timeout.
-        if (timeout)
-        {
-            myCounter_ms = 0U;
-        }
+        if (timeout) { myCounter_ms = 0U; }
         return timeout;
     }
 

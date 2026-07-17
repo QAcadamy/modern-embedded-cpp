@@ -20,7 +20,7 @@ public:
 
     /**
      * @brief Check if the counter is initialized.
-     * 
+     *
      * @return True if initialized, false otherwise.
      */
     virtual bool isInitialized() const noexcept = 0;
@@ -32,7 +32,7 @@ public:
 
     /**
      * @brief Get the current counter value.
-     * 
+     *
      * @return The current counter value.
      */
     virtual std::uint32_t value() const noexcept = 0;

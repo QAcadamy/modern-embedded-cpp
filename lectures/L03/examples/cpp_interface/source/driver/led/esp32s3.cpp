@@ -17,10 +17,10 @@ Esp32s3::Esp32s3(const std::uint8_t pin, const bool initialState) noexcept
 }
 
 // -----------------------------------------------------------------------------
-Esp32s3::~Esp32s3() noexcept 
+Esp32s3::~Esp32s3() noexcept
 {
     // Insert code to release allocated resources here.
-    std::cout << "Deleting LED connected to pin " << static_cast<int>(myPin) 
+    std::cout << "Deleting LED connected to pin " << static_cast<int>(myPin)
               << " on processor STM32F103!\n";
 }
 
@@ -31,7 +31,7 @@ std::uint8_t Esp32s3::pin() const noexcept { return myPin; }
 bool Esp32s3::isEnabled() const noexcept { return myIsEnabled; }
 
 // -----------------------------------------------------------------------------
-void Esp32s3::setEnabled(const bool enable) noexcept 
+void Esp32s3::setEnabled(const bool enable) noexcept
 {
     // Insert code to enable the LED here.
     myIsEnabled = enable;
@@ -46,7 +46,7 @@ void Esp32s3::toggle() noexcept { setEnabled(!myIsEnabled); }
 void Esp32s3::init(const bool initialState) noexcept
 {
     // Insert code to initialize the hardware here.
-    std::cout << "Initializing LED connected to pin " << static_cast<int>(myPin) 
+    std::cout << "Initializing LED connected to pin " << static_cast<int>(myPin)
               << " on processor STM32F103, starting value = " << initialState << "!\n";
     setEnabled(initialState);
 }

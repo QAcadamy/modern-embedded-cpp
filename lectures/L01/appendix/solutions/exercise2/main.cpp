@@ -8,7 +8,7 @@
 
 /**
  * @brief Create and run a timer instance.
- * 
+ *
  * @return Exit status (0 = success).
  */
 int main()
@@ -23,10 +23,7 @@ int main()
         timer.tick();
 
         // Print a message on timeout.
-        if (timer.hasTimedOut())
-        {
-            std::printf("Timeout after %u ms!\n", timer.timeout_ms());
-        }
+        if (timer.hasTimedOut()) { std::printf("Timeout after %u ms!\n", timer.timeout_ms()); }
     }
     return 0;
 }

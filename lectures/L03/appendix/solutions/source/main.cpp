@@ -28,7 +28,7 @@ void sendMessage(serial::Interface& serial) noexcept
 
 /**
  * @brief Create and use serial drivers.
- * 
+ *
  * @return Exit status (0 = success).
  */
 int main()

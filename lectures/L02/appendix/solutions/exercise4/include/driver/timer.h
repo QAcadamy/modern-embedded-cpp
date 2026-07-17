@@ -9,7 +9,7 @@ namespace driver
 {
 /**
  * @brief Timer driver.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Timer final
@@ -17,7 +17,7 @@ class Timer final
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] timeout_ms Timeout in milliseconds. Must ge greater than 0.
      */
     explicit Timer(std::uint32_t timeout_ms) noexcept;
@@ -29,21 +29,21 @@ public:
 
     /**
      * @brief Get the set timeout of the timer.
-     * 
+     *
      * @return Timeout in milliseconds.
      */
     std::uint32_t timeout_ms() const noexcept;
 
     /**
      * @brief Check if the timer is running.
-     * 
+     *
      * @return True if the timer is running, false otherwise.
      */
     bool isRunning() const noexcept;
 
     /**
      * @brief Check if the timer is initialized.
-     * 
+     *
      * @return True if the timer is initialized, false otherwise.
      */
     bool isInitialized() const noexcept;
@@ -70,7 +70,7 @@ public:
 
     /**
      * @brief Check if the timer has timed out.
-     * 
+     *
      * @return True if the timer has timed out, false otherwise.
      */
     bool hasTimedOut() noexcept;

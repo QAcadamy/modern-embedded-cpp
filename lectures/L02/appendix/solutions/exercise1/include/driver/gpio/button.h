@@ -9,7 +9,7 @@ namespace driver::gpio
 {
 /**
  * @brief Button driver.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Button final
@@ -17,7 +17,7 @@ class Button final
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] pin Button pin.
      */
     explicit Button(const std::uint8_t pin) noexcept
@@ -27,21 +27,21 @@ public:
 
     /**
      * @brief Get the button pin.
-     * 
+     *
      * @return The button pin number.
      */
     std::uint8_t pin() const noexcept { return myPin; }
 
     /**
      * @brief Check if the button is pressed.
-     * 
+     *
      * @return True if the button is pressed, false otherwise.
      */
     bool isPressed() const noexcept { return myPressed; }
 
     /**
      * @brief Set button state.
-     * 
+     *
      * @param[in] pressed True if the button is pressed, false otherwise.
      */
     void setPressed(const bool pressed) noexcept { myPressed = pressed; }

@@ -41,8 +41,5 @@ bool Stub::read(std::uint8_t& byte) noexcept
 }
 
 // -----------------------------------------------------------------------------
-void Stub::setInitialized(const bool initialized) noexcept
-{
-    myInitialized = initialized;
-}
+void Stub::setInitialized(const bool initialized) noexcept { myInitialized = initialized; }
 } // namespace driver::serial

@@ -11,10 +11,7 @@ namespace driver
 namespace
 {
 // -----------------------------------------------------------------------------
-constexpr bool isTimeoutValid(const std::uint32_t timeout_ms) noexcept
-{
-    return 0U < timeout_ms;
-}
+constexpr bool isTimeoutValid(const std::uint32_t timeout_ms) noexcept { return 0U < timeout_ms; }
 } // namespace
 
 // -----------------------------------------------------------------------------
@@ -46,20 +43,20 @@ bool Timer::isRunning() const noexcept { return myRunning; }
 bool Timer::isInitialized() const noexcept { return myInitialized; }
 
 // -----------------------------------------------------------------------------
-void Timer::start() noexcept 
-{ 
+void Timer::start() noexcept
+{
     if (myInitialized && !myRunning) { myRunning = true; }
 }
 
 // -----------------------------------------------------------------------------
-void Timer::stop() noexcept 
-{ 
+void Timer::stop() noexcept
+{
     if (myInitialized && myRunning) { myRunning = false; }
 }
 
 // -----------------------------------------------------------------------------
-void Timer::toggle() noexcept 
-{ 
+void Timer::toggle() noexcept
+{
     if (myInitialized) { myRunning = !myRunning; }
 }
 

@@ -11,7 +11,7 @@ namespace driver::led
 {
 /**
  * @brief LED driver for ATmega328P.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Atmega328p final : public Interface
@@ -19,7 +19,7 @@ class Atmega328p final : public Interface
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] pin The pin the LED is connected to.
      */
     explicit Atmega328p(std::uint8_t pin) noexcept;
@@ -31,21 +31,21 @@ public:
 
     /**
      * @brief Get the pin the LED is connected to.
-     * 
+     *
      * @return The pin the LED is connected to.
      */
     std::uint8_t pin() const noexcept override;
 
     /**
      * @brief Check whether the LED is enabled.
-     * 
+     *
      * @return True if the LED is enabled, false otherwise.
      */
     bool isEnabled() const noexcept override;
 
     /**
      * @brief Enable/disable the LED.
-     * 
+     *
      * @param[in] enable True if the LED is to be enabled, false otherwise.
      */
     void setEnabled(bool enable) noexcept override;

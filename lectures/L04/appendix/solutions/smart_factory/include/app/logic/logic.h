@@ -16,7 +16,7 @@ namespace app::logic
 {
 /**
  * @brief Application logic.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Logic final
@@ -24,12 +24,12 @@ class Logic final
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] factory Driver factory.
      * @param[in] txPin Transfer pin.
      * @param[in] rxPin Receive pin.
      */
-    explicit Logic(driver::factory::Interface& factory, const std::uint8_t txPin, 
+    explicit Logic(driver::factory::Interface& factory, const std::uint8_t txPin,
                    const std::uint8_t rxPin) noexcept
         : mySerial{factory.serial(txPin, rxPin)}
     {}
@@ -52,10 +52,7 @@ public:
             mySerial->write(txByte++);
 
             // Print byte if received.
-            if (mySerial->read(rxByte))
-            {
-                std::printf("RX byte: 0x%02X!\n", rxByte);
-            }
+            if (mySerial->read(rxByte)) { std::printf("RX byte: 0x%02X!\n", rxByte); }
             std::this_thread::sleep_for(std::chrono::milliseconds(sleep_ms));
         }
     }
@@ -71,4 +68,3 @@ private:
     std::unique_ptr<driver::serial::Interface> mySerial;
 };
 } // namespace app::logic
-

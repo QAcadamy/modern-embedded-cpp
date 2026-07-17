@@ -51,9 +51,9 @@ static const gpio_vtable_t* gpio_vptr_get_instance(void);
 static inline gpio_impl_t* get_impl(gpio_interface_t* self) { return (gpio_impl_t*)(self); }
 
 // -----------------------------------------------------------------------------
-static inline const gpio_impl_t* get_const_impl(const gpio_interface_t* self) 
-{ 
-    return (const gpio_impl_t*)(self); 
+static inline const gpio_impl_t* get_const_impl(const gpio_interface_t* self)
+{
+    return (const gpio_impl_t*)(self);
 }
 
 // -----------------------------------------------------------------------------
@@ -64,17 +64,17 @@ static bool is_pin_free(const uint8_t id)
 }
 
 // -----------------------------------------------------------------------------
-static void reserve_pin(const uint8_t id) 
-{ 
+static void reserve_pin(const uint8_t id)
+{
     // Set the corresponding bit in the pin registry.
-    pin_registry |= (1U << id); 
+    pin_registry |= (1U << id);
 }
 
 // -----------------------------------------------------------------------------
-static void release_pin(const uint8_t id) 
-{ 
+static void release_pin(const uint8_t id)
+{
     // Clear the corresponding bit in the pin registry.
-    pin_registry &= ~(1U << id); 
+    pin_registry &= ~(1U << id);
 }
 
 // -----------------------------------------------------------------------------
@@ -128,7 +128,6 @@ static void gpio_impl_init(gpio_impl_t* impl, const uint8_t pin, const gpio_dire
             *(impl->ddrx) &= ~(1U << impl->pin);
             *(impl->portx) |= (1U << impl->pin);
             break;
-
         }
         case GPIO_DIRECTION_OUT:
         {
@@ -186,7 +185,7 @@ static bool gpio_read(const gpio_interface_t* self)
     const gpio_impl_t* impl = get_const_impl(self);
 
     // Return true if the input is high, false otherwise.
-    return NULL != impl ? (bool)(*(impl->pinx) & (1U << impl->pin)) : false; 
+    return NULL != impl ? (bool)(*(impl->pinx) & (1U << impl->pin)) : false;
 }
 
 // -----------------------------------------------------------------------------
@@ -219,8 +218,7 @@ static void gpio_toggle(gpio_interface_t* self)
 static const gpio_vtable_t* gpio_vptr_get_instance(void)
 {
     // Create and initialize vtable holding function pointers (done once at startup).
-    static const gpio_vtable_t vtable =
-    {
+    static const gpio_vtable_t vtable = {
         .del    = gpio_del,
         .read   = gpio_read,
         .write  = gpio_write,

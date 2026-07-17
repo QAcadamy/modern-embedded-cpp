@@ -37,7 +37,7 @@ void blinkLed(gpio::Led& led, const std::size_t iterationCount = 1U) noexcept
 
 /**
  * @brief Create and use GPIO devices.
- * 
+ *
  * @return Exit status (0 = success).
  */
 int main()

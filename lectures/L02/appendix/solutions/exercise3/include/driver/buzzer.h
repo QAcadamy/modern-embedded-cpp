@@ -9,7 +9,7 @@ namespace driver
 {
 /**
  * @brief Buzzer driver.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Buzzer final
@@ -17,7 +17,7 @@ class Buzzer final
 public:
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] pin Buzzer pin.
      * @param[in] initialState Initial state (default = off).
      */
@@ -30,14 +30,14 @@ public:
 
     /**
      * @brief Get the buzzer pin.
-     * 
+     *
      * @return The buzzer pin number.
      */
     std::uint8_t pin() const noexcept;
 
     /**
      * @brief Check if the buzzer is enabled.
-     * 
+     *
      * @return True if the buzzer is enabled, false otherwise.
      */
     bool isEnabled() const noexcept;

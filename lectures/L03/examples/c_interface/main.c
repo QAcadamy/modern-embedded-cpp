@@ -12,7 +12,7 @@
 
 /**
  * @brief Simulate button events.
- * 
+ *
  * @param[out] button Pointer to the simulated button.
  */
 void simulate_button_event(gpio_interface_t* button)
@@ -20,16 +20,16 @@ void simulate_button_event(gpio_interface_t* button)
     static uint16_t loop_counter = 0U;
 
     // Simulate a button toggle every LOOP_COUNTER_MAX calls.
-    if (LOOP_COUNTER_MAX <= ++loop_counter) 
-    { 
-        button->vptr->toggle(button); 
+    if (LOOP_COUNTER_MAX <= ++loop_counter)
+    {
+        button->vptr->toggle(button);
         loop_counter = 0U;
     }
 }
 
 /**
  * @brief Toggle an LED connected to ATmega328p at pressdown (rising edge) of a simulated button.
- * 
+ *
  * @return Unused (this example never returns).
  */
 int main(void)
@@ -39,7 +39,7 @@ int main(void)
     gpio_interface_t* button = gpio_stub_new();
     bool button_prev         = false;
 
-    while (1) 
+    while (1)
     {
         // Simulate button events every LOOP_COUNTER_MAX main-loop iterations.
         simulate_button_event(button);

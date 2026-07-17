@@ -2,8 +2,8 @@
  * @brief Multithreading solutions - Exercise Set 6.
  */
 #include <atomic>
-#include <condition_variable>
 #include <chrono>
+#include <condition_variable>
 #include <cstdint>
 #include <cstdio>
 #include <mutex>
@@ -25,7 +25,7 @@ struct SharedMem
 
 /**
  * @brief Halt the running thread.
- * 
+ *
  * @param[in] ms Sleep duration in milliseconds.
  */
 void sleep_ms(const std::uint16_t ms) noexcept
@@ -38,7 +38,7 @@ void sleep_ms(const std::uint16_t ms) noexcept
  *
  * @param[in] shared Shared memory to check.
  * @param[in] stop Atomic stop flag.
- * 
+ *
  * @return True if new data is available or stop is set, false otherwise.
  */
 bool hasNewData(SharedMem& shared, const std::atomic<bool>& stop) noexcept

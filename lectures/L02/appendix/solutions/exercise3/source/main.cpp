@@ -17,7 +17,7 @@ const char* state(const driver::Buzzer& buzzer) noexcept
 
 /**
  * @brief Create and use a buzzer.
- * 
+ *
  * @return Exit status (0 = success).
  */
 int main()

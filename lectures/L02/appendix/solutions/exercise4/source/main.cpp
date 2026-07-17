@@ -22,10 +22,7 @@ int runSystem(driver::Timer& timer) noexcept
     {
         timer.tick();
 
-        if (timer.hasTimedOut())
-        { 
-            std::printf("Timeout after %u ms!\n", timer.timeout_ms()); 
-        }
+        if (timer.hasTimedOut()) { std::printf("Timeout after %u ms!\n", timer.timeout_ms()); }
     }
     return 0;
 }
@@ -33,7 +30,7 @@ int runSystem(driver::Timer& timer) noexcept
 
 /**
  * @brief Create and use a timer.
- * 
+ *
  * @return Exit status (0 = success, -1 = failure).
  */
 int main()

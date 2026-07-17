@@ -11,7 +11,7 @@ namespace driver::serial
 {
 /**
  * @brief Serial driver stub.
- * 
+ *
  *        This class is non-copyable and non-movable.
  */
 class Stub final : public Interface
@@ -33,34 +33,34 @@ public:
 
     /**
      * @brief Check if the serial driver has been initialized.
-     * 
+     *
      * @return True if initialized, false otherwise.
      */
     bool isInitialized() const noexcept override { return myInitialized; }
 
     /**
      * @brief Transmit one byte of data.
-     * 
+     *
      * @param[in] byte Byte to transmit.
      */
     void write(const std::uint8_t byte) noexcept override
     {
         if (!myInitialized) { return; }
         myLastByte = byte;
-        myHasData = true;
+        myHasData  = true;
     }
 
     /**
      * @brief Receive one byte of data.
-     * 
+     *
      * @param[out] byte Received byte (if any).
-     * 
+     *
      * @return True if a byte was received, false otherwise.
      */
     bool read(std::uint8_t& byte) noexcept override
     {
         if (!myInitialized || !myHasData) { return false; }
-        byte = myLastByte;
+        byte      = myLastByte;
         myHasData = false;
         return true;
     }

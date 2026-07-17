@@ -23,9 +23,9 @@ typedef struct gpio_stub
 static inline gpio_stub_t* get_impl(gpio_interface_t* self) { return (gpio_stub_t*)(self); }
 
 // -----------------------------------------------------------------------------
-static inline const gpio_stub_t* get_const_impl(const gpio_interface_t* self) 
-{ 
-    return (const gpio_stub_t*)(self); 
+static inline const gpio_stub_t* get_const_impl(const gpio_interface_t* self)
+{
+    return (const gpio_stub_t*)(self);
 }
 
 // -----------------------------------------------------------------------------
@@ -81,8 +81,7 @@ static void gpio_toggle(gpio_interface_t* self)
 static const gpio_vtable_t* gpio_vptr_get_instance(void)
 {
     // Create and initialize vtable holding function pointers (done once at startup).
-    static const gpio_vtable_t vtable =
-    {
+    static const gpio_vtable_t vtable = {
         .del    = gpio_del,
         .read   = gpio_read,
         .write  = gpio_write,

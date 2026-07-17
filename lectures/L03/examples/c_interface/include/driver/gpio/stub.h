@@ -10,7 +10,7 @@
 
 /**
  * @brief Create new GPIO stub.
- * 
+ *
  * @return The new GPIO instance, or a nullptr on failure.
  */
 gpio_interface_t* gpio_stub_new(void);

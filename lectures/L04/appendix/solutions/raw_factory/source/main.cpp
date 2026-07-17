@@ -19,7 +19,7 @@ using Factory = driver::factory::Esp32s3;
 
 /**
  * @brief Run application with serial driver.
- * 
+ *
  * @return 0 (should never occur).
  */
 int main()

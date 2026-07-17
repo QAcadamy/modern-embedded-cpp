@@ -26,27 +26,27 @@ typedef struct gpio_vtable
 {
     /**
      * @brief Delete given GPIO.
-     * 
+     *
      *        Relase allocated resources and set the corresponding pointer to null.
-     * 
+     *
      * @param[in] self Double pointer to the GPIO to delete.
      */
     void (*del)(gpio_interface_t** self);
 
     /**
      * @brief Read input of given GPIO.
-     * 
+     *
      * @param[in] self The GPIO to read.
-     * 
+     *
      * @return True if the GPIO is enabled, false otherwise.
      */
     bool (*read)(const gpio_interface_t* self);
 
     /**
      * @brief Write output of given GPIO.
-     * 
+     *
      *        This operation is only supported for outputs.
-     * 
+     *
      * @param[in] self The GPIO to write.
      * @param[in] value The value to write.
      */
@@ -54,16 +54,16 @@ typedef struct gpio_vtable
 
     /**
      * @brief Toggle output of given GPIO.
-     * 
+     *
      *        This operation is only supported for outputs.
-     * 
+     *
      * @param[in] self The GPIO to toggle.
      */
     void (*toggle)(gpio_interface_t* self);
 } gpio_vtable_t;
 
-/** 
- * @brief GPIO interface. 
+/**
+ * @brief GPIO interface.
  */
 typedef struct gpio_interface
 {

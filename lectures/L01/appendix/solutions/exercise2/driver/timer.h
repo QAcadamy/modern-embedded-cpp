@@ -15,7 +15,7 @@ struct Timer
 {
     /**
      * @brief Constructor.
-     * 
+     *
      * @param[in] timeout_ms Timeout in milliseconds.
      * @param[in] initialState Initial running state (default = stopped).
      */
@@ -28,8 +28,8 @@ struct Timer
         if (initialState) { start(); }
     }
 
-    /** 
-     * @brief Destructor. 
+    /**
+     * @brief Destructor.
      */
     ~Timer() noexcept
     {
@@ -39,14 +39,14 @@ struct Timer
 
     /**
      * @brief Get the timeout in milliseconds.
-     * 
+     *
      * @return The configured timeout in milliseconds.
      */
     std::uint16_t timeout_ms() const noexcept { return myTimeout_ms; }
 
     /**
      * @brief Check whether the timer is running.
-     * 
+     *
      * @return True if the timer is running, false otherwise.
      */
     bool isRunning() const noexcept { return myRunning; }
@@ -81,7 +81,7 @@ struct Timer
 
     /**
      * @brief Tick the timer.
-     * 
+     *
      *        Advance the timer by one millisecond if it is running.
      */
     void tick() noexcept
@@ -91,9 +91,9 @@ struct Timer
 
     /**
      * @brief Check if the timer has timed out.
-     * 
+     *
      *        Reset the internal counter when a timeout occurs.
-     * 
+     *
      * @return True if the timer has timed out, false otherwise.
      */
     bool hasTimedOut() noexcept

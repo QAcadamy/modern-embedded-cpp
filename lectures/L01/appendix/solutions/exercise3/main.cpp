@@ -8,7 +8,7 @@ namespace
 {
 /**
  * @brief Swap values.
- * 
+ *
  * @param[in, out] a The first value.
  * @param[in, out] b The second value.
  */
@@ -22,7 +22,7 @@ constexpr void swap(std::uint32_t& a, std::uint32_t& b) noexcept
 
 /**
  * @brief Swap two variables.
- * 
+ *
  *        Print the content of each variable before and after the swap.
  *
  * @return Exit status (0 = success).
