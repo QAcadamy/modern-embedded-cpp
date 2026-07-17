@@ -1015,6 +1015,70 @@ constexpr void set(T& reg, const Bits... bits) noexcept
 
 ---
 
+### 11. `.h` vs `.hpp`
+In C and C++, header files are conventionally given the extension `.h`. In C++-only code, the
+extension `.hpp` is also commonly used.
+
+From the compiler's perspective, the extension makes no difference:
+* `#include` works identically regardless of the file extension.
+* The compiler does not use the extension to decide whether to compile a file as C or C++; that is
+  determined by the compiler invocation (e.g. `gcc` vs `g++`) or by the extension of the *source*
+  file that includes the header.
+
+Even though the choice has no effect on the generated code, the extension is still useful as a
+convention:
+* `.h` is shared between C and C++, so a `.h` file could be valid C, valid C++, or both — the
+  extension alone does not tell you which.
+* `.hpp` immediately signals that a header uses C++-only features, such as classes, templates,
+  namespaces, or references, and therefore requires a C++ compiler.
+
+This is especially useful in a course like this one, where paired C and C++ implementations of the
+same driver are sometimes shown side by side (see e.g. the `c_interface` vs `cpp_interface`
+examples in Lecture 3). Using `.hpp` for the C++ version removes any doubt about which language a
+given header belongs to.
+
+**Note:** In this course, header files use the `.hpp` extension.
+
+---
+
+### 12. `[[nodiscard]]`
+`[[nodiscard]]` is a C++17 attribute that can be added to a function declaration. It tells the
+compiler to emit a warning if the caller ignores (discards) the function's return value.
+
+Like `constexpr` and templates, `[[nodiscard]]` is a zero-cost abstraction: it exists purely as a
+compile-time aid and has no effect on the generated machine code or runtime performance.
+
+Consider the `read()` method of the `driver::Gpio` struct introduced earlier:
+
+```cpp
+[[nodiscard]] bool read() const noexcept { return myState; }
+```
+
+Since `read()` has no side effects, calling it and ignoring the result does nothing useful and is
+almost always a mistake. With `[[nodiscard]]` in place, the following now produces a compiler
+warning:
+
+```cpp
+led.read(); // Warning: ignoring return value of function declared 'nodiscard'.
+```
+
+While the return value must be used to avoid the warning:
+
+```cpp
+const bool state{led.read()};
+```
+
+`[[nodiscard]]` is particularly useful in embedded systems for functions such as:
+* Query/read functions, similar to `read()` above.
+* Functions returning error or status codes, where ignoring the result may hide a failure.
+* Factory functions that return an owning resource, such as `std::unique_ptr` (introduced later in
+  the course), where discarding the result would immediately release the resource.
+
+**Note:** `[[nodiscard]]` should not be added indiscriminately. Functions that are called mainly
+for their side effects, where the return value is genuinely optional, do not need it.
+
+---
+
 ### Additional information about type traits
 Type traits allow programs to inspect and reason about types at compile time.
 
@@ -1102,6 +1166,8 @@ This appendix introduced the following modern C++ features commonly used in embe
 * Structs with member functions, constructors/destructors, and encapsulation.
 * References.
 * Function templates.
+* `.h` vs `.hpp` header file conventions.
+* `[[nodiscard]]` for catching ignored return values.
 
 These features allow developers to write safer, clearer, and more maintainable embedded software while still maintaining full control over hardware and performance.
 
