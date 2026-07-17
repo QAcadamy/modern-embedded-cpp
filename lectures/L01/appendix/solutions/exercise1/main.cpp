@@ -1,5 +1,5 @@
 /**
- * @brief Solution for exercise set 1.
+ * @file Solution for exercise set 1.
  */
 #include <cstdint>
 #include <cstdio>

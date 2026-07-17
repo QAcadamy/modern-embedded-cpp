@@ -149,14 +149,14 @@ CXX_COMPILER := g++
 CXX_FLAGS := -Wall -Werror -std=c++17
 
 # Source files.
-SOURCE_FILES := main.cpp
+SRC_FILES := main.cpp
 
 # Build and run the application as default.
 default: build run
 
 # Build the application.
 build:
-    @$(CXX_COMPILER) $(SOURCE_FILES) -o $(TARGET) $(CXX_FLAGS)
+    @$(CXX_COMPILER) $(SRC_FILES) -o $(TARGET) $(CXX_FLAGS)
 
 # Run the application.
 run:
@@ -171,7 +171,7 @@ clean:
 
 ## Tips
 For compilation to work correctly:
-* Place all header and source files (`.h` and `.cpp` files) directly in this directory.
+* Place all header and source files (`.hpp` and `.cpp` files) directly in this directory.
 * Make sure to include all source files (`.cpp` files) between `g++` and `-o` in the build target.
 * For simple examples, all source files can be placed in the same directory.
 
@@ -181,7 +181,7 @@ In larger embedded projects, source files are typically organized in separate di
 ```text
 include/
     driver/
-        gpio.h
+        gpio.hpp
 source/
     driver/
         gpio.cpp
@@ -204,7 +204,7 @@ CXX_COMPILER := g++
 CXX_FLAGS := -Wall -Werror -std=c++17 -Iinclude
 
 # Source files.
-SOURCE_FILES := source/driver/gpio.cpp \
+SRC_FILES := source/driver/gpio.cpp \
                 source/main.cpp \
 
 # Build and run the application as default.
@@ -212,7 +212,7 @@ default: build run
 
 # Build the application.
 build:
-    @$(CXX_COMPILER) $(SOURCE_FILES) -o $(TARGET) $(CXX_FLAGS)
+    @$(CXX_COMPILER) $(SRC_FILES) -o $(TARGET) $(CXX_FLAGS)
 
 # Run the application.
 run:

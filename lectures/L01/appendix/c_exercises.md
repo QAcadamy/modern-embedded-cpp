@@ -58,13 +58,13 @@ Tasks:
 ## Exercise Set 2 – Struct Driver
 
 ### Exercise 2.1 – Software Timer
-In this exercise you will implement a simple software timer driver `driver::Timer` in a header file `driver/timer.h`.
+In this exercise you will implement a simple software timer driver `driver::Timer` in a header file `driver/timer.hpp`.
 
 Add the following lines at the top of the file:
 
 ```cpp
 /**
- * @brief Timer driver implementation.
+ * @file Timer driver implementation.
  */
 #pragma once
 
@@ -89,12 +89,10 @@ Add three private member variables:
   * Store the timeout in milliseconds.
   * Have the type `const std::uint16_t`.
   * Be named `myTimeout_ms`.
-
 * The second member variable shall:
   * Store the internal counter in milliseconds.
   * Have the type `std::uint16_t`.
   * Be named `myCounter_ms`.
-
 * The third member variable shall:
   * Indicate whether the timer is running.
   * Have the type `bool`.
@@ -133,8 +131,10 @@ Destroying timer!
 Add the following public methods:
 * `timeout_ms()` shall:
     * Return `myTimeout_ms`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * `isRunning()` shall:
     * Return `myRunning`.
+    * Be marked `const`, `noexcept`, and `[[nodiscard]]`.
 * `start()` shall:
   * Set `myRunning` to `true`.
   * Print `Starting timer!`.
@@ -153,6 +153,7 @@ Add the following public methods:
   * Return `true` if `myCounter_ms >= myTimeout_ms`, otherwise `false`.
   * If `myCounter_ms >= myTimeout_ms`:
     * `myCounter_ms` shall be reset to `0U`.
+  * Be marked `noexcept` and `[[nodiscard]]`.
 
 ### e) Create and use a timer instance
 In `main()`:

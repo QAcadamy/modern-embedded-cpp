@@ -1,5 +1,5 @@
 /**
- * @brief Solution for exercise set 4.
+ * @file Solution for exercise set 4.
  */
 #include <bitset>
 #include <cstdint>

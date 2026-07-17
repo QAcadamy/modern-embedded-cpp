@@ -35,7 +35,97 @@ Unlike many desktop C++ applications, embedded systems often:
 
 ---
 
-### 3. Namespaces
+### 3. `.h` vs `.hpp`
+In C and C++, header files are conventionally given the extension `.h`. In C++-only code, the
+extension `.hpp` is also commonly used.
+
+From the compiler's perspective, the extension makes no difference:
+* `#include` works identically regardless of the file extension.
+* The compiler does not use the extension to decide whether to compile a file as C or C++; that is
+  determined by the compiler invocation (e.g. `gcc` vs `g++`) or by the extension of the *source*
+  file that includes the header.
+
+Even though the choice has no effect on the generated code, the extension is still useful as a
+convention:
+* `.h` is shared between C and C++, so a `.h` file could be valid C, valid C++, or both — the
+  extension alone does not tell you which.
+* `.hpp` immediately signals that a header uses C++-only features, such as classes, templates,
+  namespaces, or references, and therefore requires a C++ compiler.
+
+This is especially useful in a course like this one, where paired C and C++ implementations of the
+same driver are sometimes shown side by side (see e.g. the `c_interface` vs `cpp_interface`
+examples in Lecture 3). Using `.hpp` for the C++ version removes any doubt about which language a
+given header belongs to.
+
+**Note:** In this course, header files use the `.hpp` extension.
+
+---
+
+### 4. `extern "C"` and `#ifdef __cplusplus`
+C and C++ have different linkage rules. C++ supports function overloading, so the compiler
+*mangles* function names to encode parameter types, allowing multiple functions with the same name
+but different signatures to coexist. C has no overloading and does not mangle names.
+
+This becomes a problem when C++ code needs to call a function compiled by a C compiler (or vice
+versa): if one side expects a mangled name and the other exports an unmangled one, the linker
+cannot find a matching symbol.
+
+`extern "C"` tells the C++ compiler to use C linkage for the enclosed declarations, disabling name
+mangling for them:
+
+```cpp
+extern "C" void gpioInit();
+```
+
+Multiple declarations can be wrapped in a block:
+
+```cpp
+extern "C"
+{
+void gpioInit();
+void gpioWrite(std::uint8_t pin, bool state);
+}
+```
+
+**Important:** `extern "C"` only affects linkage/name mangling. It does not make C++-only syntax
+valid — a declaration wrapped in `extern "C"` must still be something that is valid in C (plain
+functions and data, no classes, templates, overloading, or references).
+
+#### `#ifdef __cplusplus`
+`extern "C"` is C++-only syntax; a C compiler does not understand it and will fail to compile a
+header containing it. Since headers are often shared between C and C++ (see previous section),
+they are usually guarded with the predefined macro `__cplusplus`, which is only defined when the
+file is compiled by a C++ compiler:
+
+```c
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void gpioInit();
+void gpioWrite(std::uint8_t pin, bool state);
+
+#ifdef __cplusplus
+}
+#endif
+```
+
+* When compiled as C++, `__cplusplus` is defined, so the declarations are wrapped in `extern "C"`.
+* When compiled as C, `__cplusplus` is undefined, the preprocessor strips out both `#ifdef` blocks
+  entirely, and the C compiler only sees the plain declarations.
+
+This pattern is common in embedded systems, where a hardware vendor typically ships C headers and
+libraries (register definitions, HAL functions), while the application itself is written in C++.
+Wrapping the vendor's C declarations this way lets C++ application code link against the C library
+without modifying the vendor's code.
+
+**Note:** A header written this way is meant to be compiled as either C or C++, which is exactly
+the kind of header that keeps the `.h` extension described in the previous section — `.hpp` would
+incorrectly imply it is C++-only.
+
+---
+
+### 5. Namespaces
 Namespaces are used to avoid symbol collisions in large software systems.
 They can be compared to folders on a computer:
 * Just as different folders can contain files with the same name, different namespaces can contain functions, classes, variables, and other entities with the same name.
@@ -107,8 +197,8 @@ Namespaces can also be nested, similar to how folders can contain subfolders:
 ```text
 include/
     driver/
-        gpio.h
-        timer.h
+        gpio.hpp
+        timer.hpp
 source/
     driver/
         gpio.cpp
@@ -117,8 +207,8 @@ source/
 ```
 
 A common convention would be:
-* The content of `driver/gpio.h` and `driver/gpio.cpp` belongs to the namespace `driver::gpio`.
-* The content of `driver/timer.h` and `driver/timer.cpp` belongs to the namespace `driver::timer`.
+* The content of `driver/gpio.hpp` and `driver/gpio.cpp` belongs to the namespace `driver::gpio`.
+* The content of `driver/timer.hpp` and `driver/timer.cpp` belongs to the namespace `driver::timer`.
 
 This makes it easy to see which module a function belongs to.
 
@@ -170,7 +260,7 @@ In embedded systems, namespaces are commonly used to organize drivers, hardware 
 
 ---
 
-### 4. `constexpr`
+### 6. `constexpr`
 The keyword `constexpr` indicates that a value or expression (including simple functions) can be evaluated at compile time rather than at runtime. This allows the compiler to compute values in advance, which can improve performance and ensure that such values are usable in constant-expression contexts.
 
 In embedded systems, `constexpr` is particularly useful for defining hardware-related constants such as clock frequencies, register offsets, buffer sizes, and bit masks.
@@ -215,7 +305,7 @@ constexpr int add(const int x, const int y) { return x + y; }
 ---
 
 
-### 5. `noexcept`
+### 7. `noexcept`
 The keyword `noexcept` indicates that a function is guaranteed not to throw exceptions.
 
 For reference, an example of throwing an exception is shown below.
@@ -277,7 +367,7 @@ bool read() noexcept { return false; }
 
 ---
 
-### 6. Default Arguments
+### 8. Default Arguments
 C++ allows functions to specify default values for parameters:
 * If the caller does not provide a value for a parameter, the default value is used automatically.
 * This can simplify APIs by allowing common cases to use fewer arguments.
@@ -351,7 +441,7 @@ as `1`).
 
 ---
 
-### 7. Modern C++ Structs
+### 9. Modern C++ Structs
 In C++, a `struct` can contain not only data members but also member functions, often referred to as methods.  
 This allows related data and operations to be grouped together in a single type.
 
@@ -771,7 +861,7 @@ Later in the course we will introduce classes:
 
 ---
 
-### 8. References
+### 10. References
 References provide an alternative way to pass variables to functions.
 
 A reference acts as an alias for another variable. This means that operations performed on the reference directly affect the original variable. References behave similarly to pointers but can be used with normal variable syntax.
@@ -834,7 +924,7 @@ As a result, references are commonly used in modern C++ when a function needs to
 
 ---
 
-### 9. The `auto` keyword
+### 11. The `auto` keyword
 The keyword `auto` allows the compiler to automatically deduce the type of a variable from its initializer.
 
 For example:
@@ -876,7 +966,7 @@ Without `auto`, the type may become very long.
 
 ---
 
-### 10. Function Templates - A First Look
+### 12. Function Templates - A First Look
 **Note:** Here we only introduce the basic idea. Templates will be covered in more detail later in the course.
 
 Templates allow functions and classes to operate on multiple data types without duplicating code.
@@ -1015,33 +1105,7 @@ constexpr void set(T& reg, const Bits... bits) noexcept
 
 ---
 
-### 11. `.h` vs `.hpp`
-In C and C++, header files are conventionally given the extension `.h`. In C++-only code, the
-extension `.hpp` is also commonly used.
-
-From the compiler's perspective, the extension makes no difference:
-* `#include` works identically regardless of the file extension.
-* The compiler does not use the extension to decide whether to compile a file as C or C++; that is
-  determined by the compiler invocation (e.g. `gcc` vs `g++`) or by the extension of the *source*
-  file that includes the header.
-
-Even though the choice has no effect on the generated code, the extension is still useful as a
-convention:
-* `.h` is shared between C and C++, so a `.h` file could be valid C, valid C++, or both — the
-  extension alone does not tell you which.
-* `.hpp` immediately signals that a header uses C++-only features, such as classes, templates,
-  namespaces, or references, and therefore requires a C++ compiler.
-
-This is especially useful in a course like this one, where paired C and C++ implementations of the
-same driver are sometimes shown side by side (see e.g. the `c_interface` vs `cpp_interface`
-examples in Lecture 3). Using `.hpp` for the C++ version removes any doubt about which language a
-given header belongs to.
-
-**Note:** In this course, header files use the `.hpp` extension.
-
----
-
-### 12. `[[nodiscard]]`
+### 13. `[[nodiscard]]`
 `[[nodiscard]]` is a C++17 attribute that can be added to a function declaration. It tells the
 compiler to emit a warning if the caller ignores (discards) the function's return value.
 
@@ -1159,14 +1223,16 @@ In this course, the traditional form `isUnsigned<T>::value` will be used for cla
 
 ### Summary
 This appendix introduced the following modern C++ features commonly used in embedded software:
+* `.h` vs `.hpp` header file conventions.
+* `extern "C"` and `#ifdef __cplusplus` for headers shared between C and C++.
 * Namespaces.
 * `constexpr` and compile-time constants.
 * `noexcept` and exception handling in embedded systems.
 * Default arguments.
 * Structs with member functions, constructors/destructors, and encapsulation.
 * References.
+* The `auto` keyword.
 * Function templates.
-* `.h` vs `.hpp` header file conventions.
 * `[[nodiscard]]` for catching ignored return values.
 
 These features allow developers to write safer, clearer, and more maintainable embedded software while still maintaining full control over hardware and performance.

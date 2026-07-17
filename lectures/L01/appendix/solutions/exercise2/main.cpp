@@ -1,10 +1,10 @@
 /**
- * @brief Solution for exercise set 2.
+ * @file Solution for exercise set 2.
  */
 #include <cstdint>
 #include <cstdio>
 
-#include "driver/timer.h"
+#include "driver/timer.hpp"
 
 /**
  * @brief Create and run a timer instance.
