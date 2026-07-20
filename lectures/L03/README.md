@@ -20,7 +20,7 @@ classes can implement in different ways.
 * Read about interfaces in [Appendix B](./appendix/b_interfaces.md).
 * You may also look at the following examples of interface implementations:
     * Demonstration in C++ [here](./examples/cpp_interface/README.md).
-    * Implementation in C to understand how interfaces work "under the hood" [here](./examples/c_interface/README.md).
+    * Implementation in C to understand how interfaces work "under the hood" [here](https://github.com/qrtech-academy/embedded-c/blob/main/lectures/L10/interface_demo/README.md) (from the previous embedded C course).
 
 ### During the Lecture
 * Participate in the lecture (live coding session).

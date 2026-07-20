@@ -345,6 +345,6 @@ blinkLed(led2, 500U);
 
 See the full example [here](../examples/cpp_interface/README.md).
 
-See also the following [C implementation](../examples/c_interface/README.md) to understand how interfaces work "under the hood".
+See also the following [C implementation](https://github.com/qrtech-academy/embedded-c/blob/main/lectures/L10/interface_demo/README.md) to understand how interfaces work "under the hood" (from the previous embedded C course).
 
 ---
