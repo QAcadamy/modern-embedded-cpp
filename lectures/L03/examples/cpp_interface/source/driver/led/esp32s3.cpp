@@ -21,7 +21,7 @@ Esp32s3::~Esp32s3() noexcept
 {
     // Insert code to release allocated resources here.
     std::cout << "Deleting LED connected to pin " << static_cast<int>(myPin)
-              << " on processor STM32F103!\n";
+              << " on processor ESP32-S3!\n";
 }
 
 // -----------------------------------------------------------------------------
