@@ -216,10 +216,10 @@ private:
 } // namespace driver::led
 ```
 
-Genom att använda pekare eller referenser till `driver::led::Interface` kan man skriva kod som fungerar med alla underklasser. Som exempel, nedan demonstreras en funktion döpt `blinkLed()`, som används för att blinka en given LED. Notera att: 
-* Ingående argument `led` utgörs av en referens till ett `driver::led::Interface`.
-* Därmed kan lysdioden utgöras av en instans en godtycklig underklass.
-* Exempelvis kan detta vara en instans av den tidigare demonstrerade klassen `driver::led::Atmega328p`, alternativt kan det vara en instans av klass för en lysdiod på en ESP32-S3-processor eller dylikt.
+By using pointers or references to `driver::led::Interface`, you can write code that works with all subclasses. As an example, a function named `blinkLed()` is demonstrated below, which is used to blink a given LED. Note that:
+* The input argument `led` consists of a reference to a `driver::led::Interface`.
+* The LED can therefore be an instance of any arbitrary subclass.
+* For example, this could be an instance of the previously demonstrated class `driver::led::Atmega328p`, or alternatively it could be an instance of a class for an LED on an ESP32-S3 processor or similar.
 
 ```cpp
 /**
@@ -240,14 +240,14 @@ void blinkLed(driver::led::Interface& led, const std::uint16_t blinkTimeMs) noex
 }
 ```
 
-När funktionen ovan anropas kan vi använda en av underklasserna direkt, exempelvis vår klass
-`driver::led::Atmega328p`. Antag att vi har implementerat en lysdiod ansluten till pin 9 på en Arduino Uno  via en instans döpt `led1`:
+When the function above is called, we can use one of the subclasses directly, for example our class
+`driver::led::Atmega328p`. Assume that we have implemented an LED connected to pin 9 on an Arduino Uno via an instance named `led1`:
 
 ```cpp
 driver::led::Atmega328p led1{9U};
 ```
 
-Vi kan blinka denna lysdiod med en blinktid på exempelvis `1000 ms` genom att kalla på funktionen `blinkLed()`. Eftersom `driver::led::Atmega328p` utgör en underklass till `driver::led::Interface` kan vi passera `led1` direkt:
+We can blink this LED with a blink time of, for example, `1000 ms` by calling the function `blinkLed()`. Since `driver::led::Atmega328p` is a subclass of `driver::led::Interface`, we can pass `led1` directly:
 
 ```cpp
 blinkLed(led1, 1000U);
