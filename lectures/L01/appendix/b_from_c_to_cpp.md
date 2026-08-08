@@ -1086,10 +1086,21 @@ This approach is easy to read and resembles how similar logic might be written i
 Since C++17, we can omit the loop by using a fold expression:
 
 ```cpp
-(reg |= (static_cast<T>(1U) << bits), ...);
+((reg |= (static_cast<T>(1U) << bits)), ...);
 ```
 
 This expression expands the parameter pack `bits...` and performs the operation once for each element.
+
+**Note:** The operation being folded needs its own pair of parentheses, hence the double
+parentheses at the start. The language requires each operand of a fold expression to be a
+so-called *cast-expression*, and an assignment such as `reg |= x` is not one. Writing
+
+```cpp
+(reg |= (static_cast<T>(1U) << bits), ...); // Won't compile.
+```
+
+therefore produces a compiler error such as `binary expression in operand of fold-expression`.
+
 Because of this feature, the `set()` function can be implemented more compactly:
 
 
@@ -1099,7 +1110,7 @@ constexpr void set(T& reg, const Bits... bits) noexcept
 {
     static_assert(std::is_integral<T>::value,
         "Failed to set bit in register: T must be of integral type!");
-    (reg |= (static_cast<T>(1U) << bits), ...);
+    ((reg |= (static_cast<T>(1U) << bits)), ...);
 }
 ```
 

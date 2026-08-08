@@ -36,14 +36,14 @@ public:
      *
      * @return True if initialized, false otherwise.
      */
-    bool isInitialized() const noexcept override { return myInitialized.load(); }
+    [[nodiscard]] bool isInitialized() const noexcept override { return myInitialized.load(); }
 
     /**
      * @brief Get the current counter value.
      *
      * @return The current counter value.
      */
-    std::uint32_t value() const noexcept override
+    [[nodiscard]] std::uint32_t value() const noexcept override
     {
         if (!isInitialized()) { return 0U; }
         std::lock_guard<std::mutex> lock{myMutex};

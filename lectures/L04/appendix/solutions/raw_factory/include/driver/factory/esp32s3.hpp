@@ -36,7 +36,8 @@ public:
      *
      * @return Pointer to the serial device.
      */
-    serial::Interface* serial(const std::uint8_t txPin, const std::uint8_t rxPin) noexcept override
+    [[nodiscard]] serial::Interface* serial(const std::uint8_t txPin,
+                                            const std::uint8_t rxPin) noexcept override
     {
         return new serial::Esp32s3(txPin, rxPin);
     }

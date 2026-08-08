@@ -21,6 +21,10 @@ source/
     main.cpp
 ```
 
+**Note:** When a class overrides a method that is marked `[[nodiscard]]` in the interface, repeat
+the attribute on the overriding method as well. The attribute is not inherited; see
+[Appendix B](./b_interfaces.md#structure-of-an-interface).
+
 ---
 
 # Exercise Set 1 – Serial interface

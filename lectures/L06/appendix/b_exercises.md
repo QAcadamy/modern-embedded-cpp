@@ -226,6 +226,10 @@ source/
     main.cpp
 ```
 
+**Note:** When a class overrides a method that is marked `[[nodiscard]]` in the interface, repeat
+the attribute on the overriding method as well. The attribute is not inherited; see
+[L03 Appendix B](../../L03/appendix/b_interfaces.md#structure-of-an-interface).
+
 ## Exercise 4.1 – Counter driver interface
 In this exercise you will design an interface named `driver::counter::Interface`.
 

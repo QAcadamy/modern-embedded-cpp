@@ -294,7 +294,7 @@ public:
         // ESP-specific cleanup here!
     }
 
-    bool read() const noexcept override
+    [[nodiscard]] bool read() const noexcept override
     {
         // ESP-specific code here!
         return false;
@@ -345,7 +345,7 @@ public:
     {}
     ~Stub() noexcept override = default;
 
-    bool read() const noexcept override { return myState; }
+    [[nodiscard]] bool read() const noexcept override { return myState; }
     void write(const bool state) noexcept override { myState = state; }
     void toggle() noexcept override { myState = !myState; }
 
@@ -414,7 +414,7 @@ public:
     Esp32s3() noexcept = default;
     ~Esp32s3() noexcept override = default;
 
-    gpio::Interface* gpio(const std::uint8_t pin) noexcept override 
+    [[nodiscard]] gpio::Interface* gpio(const std::uint8_t pin) noexcept override 
     { 
         return new gpio::Esp32s3(pin);
     }
@@ -448,7 +448,7 @@ public:
     Stub() noexcept = default;
     ~Stub() noexcept override = default;
 
-    gpio::Interface* gpio(const std::uint8_t pin) noexcept override
+    [[nodiscard]] gpio::Interface* gpio(const std::uint8_t pin) noexcept override
     {
         // Ignore the pin number since it is not used by the stub.
         (void) (pin);
@@ -471,6 +471,9 @@ We then create a logic class that uses a given factory to create instances, in a
 * In the destructor we free the allocated resources, i.e. the GPIO instances — since we have allocated memory using raw pointers we are responsible for doing this ourselves.
 * In the method `run()`, `myLed` is toggled on the rising edge of the push button.
 * Because `myLed` and `myButton` are pointers, the arrow operator `->` is used to call their methods.
+* The copy and move operations are deleted. This is particularly important here, because `Logic` owns two raw pointers and deletes them in its destructor. Had we not deleted them, the compiler would have generated a copy constructor that copies the two *pointer values*, so a copy would refer to the exact same two GPIO objects. Both objects would then delete them when destroyed, which means each GPIO object would be deleted twice; a **double deletion**, which is undefined behavior, would occur. The same applies to the copy assignment operator.
+
+**Note:** This is a general rule, and it is sometimes referred to as the *rule of three*: a class that needs a destructor almost always needs its copy operations written or deleted as well. For a class such as `Logic`, which represents one system with one set of drivers, deleting them is the right choice.
 
 In this example, the system logic owns the driver objects. The pointers returned by the factory are therefore owned by `Logic`, which means that the system logic is also responsible for deleting them in the destructor:
 
@@ -516,6 +519,14 @@ public:
             buttonPrev = buttonCurrent;
         }
     }
+
+    // Deleting the copy operations is essential here: a copy would hold the same two pointers,
+    // and both objects would delete the same GPIO instances (double deletion).
+    Logic()                        = delete; // No default constructor.
+    Logic(const Logic&)            = delete; // No copy constructor.
+    Logic(Logic&&)                 = delete; // No move constructor.
+    Logic& operator=(const Logic&) = delete; // No copy assignment.
+    Logic& operator=(Logic&&)      = delete; // No move assignment.
 
 private:
     driver::gpio::Interface* myLed;

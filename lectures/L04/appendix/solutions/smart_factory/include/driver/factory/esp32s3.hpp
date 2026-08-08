@@ -37,8 +37,8 @@ public:
      *
      * @return Pointer to the serial device.
      */
-    std::unique_ptr<serial::Interface> serial(const std::uint8_t txPin,
-                                              const std::uint8_t rxPin) noexcept override
+    [[nodiscard]] std::unique_ptr<serial::Interface>
+    serial(const std::uint8_t txPin, const std::uint8_t rxPin) noexcept override
     {
         return std::make_unique<serial::Esp32s3>(txPin, rxPin);
     }

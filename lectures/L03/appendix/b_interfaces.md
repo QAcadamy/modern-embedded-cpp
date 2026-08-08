@@ -43,10 +43,11 @@ A few things to note:
 * All virtual methods are here marked `noexcept`:
     * This forces all concrete implementations in the subclasses to not be able to throw exceptions.
     * This is advantageous in an embedded system, but if you do not want to enforce this it is fine to omit `noexcept` here.
-* The method isRunning() is marked [[nodiscard]]:
+* The method `isRunning()` is marked `[[nodiscard]]`:
     * This encourages callers to use the returned value by generating a compiler warning if it is discarded.
-    * Since [[nodiscard]] is specified in the interface, it is inherited by all overriding methods.
-    * Therefore, subclasses do not need (and should not) repeat the [[nodiscard]] attribute on their implementations.
+    * The attribute belongs to the declaration it is written on, not to the class. It is therefore **not** inherited by overriding methods, and a call made directly on a concrete subclass whose implementation omits it produces no warning.
+    * Therefore, subclasses **should** repeat the `[[nodiscard]]` attribute on their implementations. This is done throughout this course.
+    * Note also that compiler support for `[[nodiscard]]` on virtual methods varies. Some compilers, such as GCC, do not warn at all when the return value of a *virtual* call is discarded, not even when the call is made through the interface. Repeating the attribute on the override is what makes the warning appear where it can.
 
 ---
 
@@ -66,7 +67,7 @@ public:
     ~Atmega328p() noexcept override;
     void start() noexcept override;
     void stop() noexcept override;
-    bool isRunning() const noexcept override;
+    [[nodiscard]] bool isRunning() const noexcept override;
     void reset() noexcept override;
 
     // Additional ATmega328P-specific methods (if any).
@@ -179,14 +180,14 @@ public:
      * 
      * @return The pin the LED is connected to.
      */
-    std::uint8_t pin() const noexcept override;
+    [[nodiscard]] std::uint8_t pin() const noexcept override;
 
     /**
      * @brief Check whether the LED is enabled.
      * 
      * @return True if the LED is enabled, false otherwise.
      */
-    bool isEnabled() const noexcept override;
+    [[nodiscard]] bool isEnabled() const noexcept override;
 
     /**
      * @brief Enable/disable the LED.
@@ -289,14 +290,14 @@ public:
      * 
      * @return The pin the LED is connected to.
      */
-    std::uint8_t pin() const noexcept override;
+    [[nodiscard]] std::uint8_t pin() const noexcept override;
 
     /**
      * @brief Check whether the LED is enabled.
      * 
      * @return True if the LED is enabled, false otherwise.
      */
-    bool isEnabled() const noexcept override;
+    [[nodiscard]] bool isEnabled() const noexcept override;
 
     /**
      * @brief Enable/disable the LED.

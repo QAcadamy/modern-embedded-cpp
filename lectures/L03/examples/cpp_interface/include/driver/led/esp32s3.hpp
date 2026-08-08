@@ -35,14 +35,14 @@ public:
      *
      * @return The pin the LED is connected to.
      */
-    std::uint8_t pin() const noexcept override;
+    [[nodiscard]] std::uint8_t pin() const noexcept override;
 
     /**
      * @brief Check whether the LED is enabled.
      *
      * @return True if the LED is enabled, false otherwise.
      */
-    bool isEnabled() const noexcept override;
+    [[nodiscard]] bool isEnabled() const noexcept override;
 
     /**
      * @brief Enable/disable the LED.

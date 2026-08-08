@@ -148,7 +148,7 @@ public:
     Esp32s3() noexcept = default;
     ~Esp32s3() noexcept override = default;
 
-    std::unique_ptr<gpio::Interface> gpio(std::uint8_t pin) noexcept override
+    [[nodiscard]] std::unique_ptr<gpio::Interface> gpio(std::uint8_t pin) noexcept override
     {
         return std::make_unique<gpio::Esp32s3>(pin);
     }
@@ -182,7 +182,7 @@ public:
     Stub() noexcept = default;
     ~Stub() noexcept override = default;
 
-    std::unique_ptr<gpio::Interface> gpio(std::uint8_t pin) noexcept override
+    [[nodiscard]] std::unique_ptr<gpio::Interface> gpio(std::uint8_t pin) noexcept override
     {
         (void)(pin);
         return std::make_unique<gpio::Stub>();
@@ -238,6 +238,12 @@ public:
             buttonPrev = buttonCurrent;
         }
     }
+
+    Logic()                        = delete; // No default constructor.
+    Logic(const Logic&)            = delete; // No copy constructor.
+    Logic(Logic&&)                 = delete; // No move constructor.
+    Logic& operator=(const Logic&) = delete; // No copy assignment.
+    Logic& operator=(Logic&&)      = delete; // No move assignment.
 
 private:
     std::unique_ptr<driver::gpio::Interface> myLed;

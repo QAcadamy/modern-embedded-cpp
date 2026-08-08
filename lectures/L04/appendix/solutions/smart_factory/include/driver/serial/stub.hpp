@@ -36,7 +36,7 @@ public:
      *
      * @return True if initialized, false otherwise.
      */
-    bool isInitialized() const noexcept override { return myInitialized; }
+    [[nodiscard]] bool isInitialized() const noexcept override { return myInitialized; }
 
     /**
      * @brief Transmit one byte of data.
